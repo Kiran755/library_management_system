@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firstapp/constants/routes.dart';
 import 'package:firstapp/services/auth/auth_exceptions.dart';
 import 'package:firstapp/services/auth/auth_service.dart';
@@ -15,11 +16,14 @@ class RegisterView extends StatefulWidget {
 class _RegisterViewState extends State<RegisterView> {
   late final TextEditingController _email;
   late final TextEditingController _password;
-
+  late final TextEditingController _sapID;
+  late final TextEditingController _Name;
   @override
   void initState() {
     _email = TextEditingController();
     _password = TextEditingController();
+    _sapID = TextEditingController();
+    _Name = TextEditingController();
     super.initState();
   }
 
@@ -27,6 +31,8 @@ class _RegisterViewState extends State<RegisterView> {
   void dispose() {
     _email.dispose();
     _password.dispose();
+    _sapID.dispose();
+    _Name.dispose();
     super.dispose();
   }
 
@@ -72,6 +78,7 @@ class _RegisterViewState extends State<RegisterView> {
                                   contentPadding: const EdgeInsets.all(14),
                                   isDense: true,
                                 ),
+                                controller: _Name,
                                 style: const TextStyle(fontSize: 14),
                               ),
                             ),
@@ -93,6 +100,7 @@ class _RegisterViewState extends State<RegisterView> {
                                   contentPadding: const EdgeInsets.all(14),
                                   isDense: true,
                                 ),
+                                controller: _sapID,
                                 style: const TextStyle(fontSize: 14),
                               ),
                             ),
@@ -142,10 +150,23 @@ class _RegisterViewState extends State<RegisterView> {
                                 onPressed: () async {
                                   final email = _email.text;
                                   final password = _password.text;
+                                  final sapid = _sapID.text;
+                                  final Name = _Name.text;
                                   try {
                                     final userCredentials =
                                         await AuthService.firebase().createUser(
                                             email: email, password: password);
+                                    final uid = userCredentials.uid;
+                                    DatabaseReference db_ref = FirebaseDatabase
+                                        .instance
+                                        .ref("Database/Names");
+                                    final snapShot =
+                                        await db_ref.child(uid).get();
+                                    if (!snapShot.exists) {
+                                      db_ref
+                                          .child(uid)
+                                          .set({"Name": Name, "SapId": sapid});
+                                    }
                                     Navigator.of(context)
                                         .pushNamed(emailVerify);
                                   } on InvalidEmailException {

@@ -3,3 +3,4 @@ const registerRoute = '/register/';
 const notesRoute = '/notes/';
 const emailVerify = '/email-verify/';
 const adminPage = '/admin-page';
+const issueBook = '/issue-book';

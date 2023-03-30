@@ -9,21 +9,38 @@ import '../enum/menuActions.dart';
 import '../main.dart';
 
 class NotesView extends StatefulWidget {
-  const NotesView({Key? key}) : super(key: key);
+  final String Name, SapID;
+  NotesView({Key? key, required this.Name, required this.SapID})
+      : super(key: key);
 
   @override
   State<NotesView> createState() => _NotesViewState();
 }
 
 class _NotesViewState extends State<NotesView> {
+  var tabs;
+  var initials = "KD";
+  @override
+  void initState() {
+    super.initState();
+    print("Name :   ${widget.Name}");
+    print("akwad :   ${widget.SapID}");
+    var Fname = widget.Name[0].toUpperCase();
+    var LnameIndex = widget.Name.indexOf(" ");
+    var Lname = widget.Name[LnameIndex + 1].toUpperCase();
+    initials = Fname + Lname;
+
+    tabs = [
+      SearchTab(Name: widget.Name, SapId: widget.SapID),
+      SearchView(sapId: widget.SapID, Name: widget.Name),
+      RequestedBookView(SapId: widget.SapID),
+      HistoryView(SapId: widget.SapID)
+    ];
+  }
+
   bool _active = false;
   int _currentIndex = 0;
-  final tabs = [
-    const SearchView(),
-    const SearchTab(),
-    const RequestedBookView(),
-    const HistoryView()
-  ];
+
   void _handleTap() {
     setState(() {
       _active = !_active;
@@ -46,17 +63,17 @@ class _NotesViewState extends State<NotesView> {
           padding: const EdgeInsets.only(left: 8.0),
           child: InkWell(
             onTap: _handleTap,
-            child: const CircleAvatar(
+            child: CircleAvatar(
               backgroundColor: Color.fromRGBO(249, 221, 150, 0.51),
               child: Text(
-                "KD",
+                initials,
                 style: TextStyle(color: Colors.black),
               ),
             ),
           ),
         ),
-        title: const Text(
-          "hello",
+        title: Text(
+          widget.Name,
           style: TextStyle(color: Colors.black),
         ),
         actions: [

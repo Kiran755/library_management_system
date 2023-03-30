@@ -1,7 +1,10 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firstapp/constants/routes.dart';
 import 'package:firstapp/services/auth/auth_exceptions.dart';
 import 'package:firstapp/services/auth/auth_service.dart';
 import 'package:firstapp/utilities/ErrorDialog.dart';
+import 'package:firstapp/views/NotesView.dart';
+import 'package:firstapp/views/SearchTab.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -92,11 +95,21 @@ class _LoginViewState extends State<LoginView> {
                               onPressed: () async {
                                 final email = _email.text;
                                 final password = _password.text;
+
                                 try {
                                   await AuthService.firebase()
                                       .logIn(email: email, password: password);
                                   final user =
                                       AuthService.firebase().currentUser;
+                                  // final userUid = user?.uid;
+                                  // DatabaseReference db_ref = FirebaseDatabase
+                                  //     .instance
+                                  //     .ref("Database/Names");
+                                  // final snapShot =
+                                  //     await db_ref.child("$userUid").get();
+                                  // if (!snapShot.exists) {
+                                  //   db_ref.set({userUid: sapID});
+                                  // }
                                   if (email ==
                                           "chetan159devadiga159@gmail.com" &&
                                       password == "123456789") {
@@ -104,11 +117,33 @@ class _LoginViewState extends State<LoginView> {
                                         .pushNamedAndRemoveUntil(
                                             adminPage, (route) => false);
                                   } else if (user?.isEmailVerified ?? false) {
-                                    Navigator.of(context)
-                                        .pushNamedAndRemoveUntil(
-                                      notesRoute,
-                                      (route) => false,
-                                    );
+                                    final userUid = user?.uid;
+                                    DatabaseReference db_ref = FirebaseDatabase
+                                        .instance
+                                        .ref("Database/Names");
+                                    final snapShot =
+                                        await db_ref.child("$userUid").get();
+                                    if (snapShot.exists) {
+                                      final sapID = snapShot
+                                          .child("SapId")
+                                          .value
+                                          .toString();
+                                      final Name = snapShot
+                                          .child("Name")
+                                          .value
+                                          .toString();
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                              builder: (context) => NotesView(
+                                                    Name: Name,
+                                                    SapID: sapID,
+                                                  )));
+                                    }
+                                    // Navigator.of(context)
+                                    //     .pushNamedAndRemoveUntil(
+                                    //   notesRoute,
+                                    //   (route) => false,
+                                    // );
                                   } else {
                                     Navigator.of(context)
                                         .pushNamedAndRemoveUntil(

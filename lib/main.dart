@@ -3,6 +3,7 @@ import 'package:firstapp/constants/routes.dart';
 import 'package:firstapp/services/auth/auth_service.dart';
 import 'package:firstapp/views/EmailVerify.dart';
 import 'package:firstapp/views/FirstScreen.dart';
+import 'package:firstapp/views/IssueBook.dart';
 import 'package:firstapp/views/LoginView.dart';
 import 'package:firstapp/views/NotesView.dart';
 import 'package:firstapp/views/RegisterView.dart';
@@ -22,7 +23,10 @@ void main() async {
     routes: {
       loginRoute: (context) => const LoginView(),
       registerRoute: (context) => const RegisterView(),
-      notesRoute: (context) => const NotesView(),
+      notesRoute: (context) => NotesView(
+            Name: "",
+            SapID: "",
+          ),
       emailVerify: (context) => const EmailVerify(),
       adminPage: (context) => const AdminPage(),
     },
@@ -43,7 +47,7 @@ class HomePage extends StatelessWidget {
               print(user);
               if (user != null) {
                 if (user.isEmailVerified) {
-                  return const NotesView();
+                  return NotesView(Name: "", SapID: "");
                 } else {
                   return const EmailVerify();
                 }

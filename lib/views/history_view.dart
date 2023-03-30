@@ -1,16 +1,26 @@
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:firstapp/views/book_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class HistoryView extends StatefulWidget {
-  const HistoryView({Key? key}) : super(key: key);
+  final String SapId;
+  const HistoryView({Key? key, required this.SapId}) : super(key: key);
 
   @override
   State<HistoryView> createState() => _HistoryViewState();
 }
 
 class _HistoryViewState extends State<HistoryView> {
+  var sapId;
+  @override
+  void initState() {
+    super.initState();
+    sapId = widget.SapId;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -44,19 +54,43 @@ class _HistoryViewState extends State<HistoryView> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: SingleChildScrollView(
-              child: Column(
-                children: const [
-                  BookViewer(
-                    value: "assets/Book2.png",
-                    color: Colors.white,
+              child: Expanded(
+                child: SizedBox(
+                  height: 500,
+                  child: FirebaseAnimatedList(
+                    defaultChild: Center(child: CircularProgressIndicator()),
+                    query: FirebaseDatabase.instance
+                        .ref("Database/SAPID/${widget.SapId}/BooksHistory"),
+                    itemBuilder: (context, snapshot, animation, index) {
+                      return Column(
+                        children: [
+                          BookViewer(
+                            color: Colors.white,
+                            value: "assets/Book2.png",
+                            DueDate: snapshot
+                                .child("Returned Date")
+                                .value
+                                .toString(),
+                            IssueDate:
+                                snapshot.child("Issued Date").value.toString(),
+                            bookAuthor:
+                                snapshot.child("BookAuthor").value.toString(),
+                            bookName:
+                                snapshot.child("BookName").value.toString(),
+                            bookCode:
+                                snapshot.child("BookCode").value.toString(),
+                          ),
+                          const Divider(
+                            indent: 10,
+                            endIndent: 10,
+                            thickness: 5,
+                            color: Color.fromRGBO(158, 90, 100, 1.0),
+                          ),
+                        ],
+                      );
+                    },
                   ),
-                  SizedBox(height: 20),
-                  BookViewer(value: "assets/Book2.png", color: Colors.white),
-                  SizedBox(height: 20),
-                  BookViewer(value: "assets/Book2.png", color: Colors.white),
-                  SizedBox(height: 20),
-                  BookViewer(value: "assets/Book2.png", color: Colors.white),
-                ],
+                ),
               ),
             ),
           ),
