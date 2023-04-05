@@ -47,7 +47,26 @@ class _SearchBookViewerState extends State<SearchBookViewer> {
               padding: const EdgeInsets.all(2.0),
               child: Row(
                 children: [
-                  Image.asset(widget.value),
+                  Container(
+                      child: Image.network(
+                        widget.value,
+                        loadingBuilder: (BuildContext context, Widget child,
+                            ImageChunkEvent? loadingProgress) {
+                          if (loadingProgress == null) {
+                            return child;
+                          }
+                          return Center(
+                            child: CircularProgressIndicator(
+                              value: loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes!
+                                  : null,
+                            ),
+                          );
+                        },
+                      ),
+                      height: 180,
+                      width: 100),
                   Flexible(
                     child: Container(
                       decoration: BoxDecoration(

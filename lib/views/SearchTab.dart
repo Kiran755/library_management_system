@@ -1,6 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:firstapp/services/auth/auth_service.dart';
+import 'package:firstapp/services/notifi_service.dart';
 import 'package:firstapp/views/book_viewer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -79,6 +80,21 @@ class _SearchTabState extends State<SearchTab> {
                             "Database/SAPID/${widget.SapId}/BooksAssigned"),
                         itemBuilder: (context, snapshot, animation, index) {
                           print("SPAID : ${widget.SapId}");
+                          String date =
+                              snapshot.child("Due Date").value.toString();
+                          String dueMonth = date.substring(0, 2);
+                          String dueDate = date.substring(3, 5);
+                          String dueYear = date.substring(6);
+                          String formatDate =
+                              "$dueYear-$dueMonth-$dueDate 12:00:00";
+                          DateTime new_date = DateTime.parse(formatDate);
+                          debugPrint(
+                              "Notifcation scheduled for that time $new_date");
+                          NotificationService().scheduleNotification(
+                              title: "Reminder",
+                              body:
+                                  "Reminder for returning the book today! If you have already returned the book,please ignore this message",
+                              scheduledNotificationDateTime: new_date);
                           return Column(
                             children: [
                               BookViewer(

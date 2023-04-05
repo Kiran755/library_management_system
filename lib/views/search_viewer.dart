@@ -17,26 +17,50 @@ class SearchView extends StatefulWidget {
 
 class _SearchViewState extends State<SearchView> {
   String name = "";
+  String dropdownvalue = "AL-DSA";
+  var items = ["AL-DSA", "AL-EA", "BES-CP", "BES-JAVA"];
   var search = "awd";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: const Color.fromRGBO(218, 170, 99, 1),
-            title: Card(
-              child: TextField(
-                decoration: const InputDecoration(
-                    prefixIcon: Icon(Icons.search), hintText: 'Search...'),
-                onChanged: (val) {
-                  setState(() {
-                    name = val;
-                  });
-                },
-              ),
-            )),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(120.0),
+          child: Column(
+            children: [
+              AppBar(
+                  automaticallyImplyLeading: false,
+                  backgroundColor: const Color.fromRGBO(218, 170, 99, 1),
+                  title: Card(
+                    child: TextField(
+                      decoration: const InputDecoration(
+                          prefixIcon: Icon(Icons.search),
+                          hintText: 'Search...'),
+                      onChanged: (val) {
+                        setState(() {
+                          name = val;
+                        });
+                      },
+                    ),
+                  )),
+              DropdownButton(
+                  value: dropdownvalue,
+                  items: items.map((String items) {
+                    return DropdownMenuItem(
+                      value: items,
+                      child: Text(items),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownvalue = newValue!;
+                    });
+                  })
+            ],
+          ),
+        ),
         body: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance.collection('AL-DSA').snapshots(),
+          stream:
+              FirebaseFirestore.instance.collection(dropdownvalue).snapshots(),
           builder: (context, snapshots) {
             return (snapshots.connectionState == ConnectionState.waiting)
                 ? const Center(
@@ -54,26 +78,26 @@ class _SearchViewState extends State<SearchView> {
                             return listItem(
                                 context,
                                 index,
-                                data["Author"],
-                                data["Code"],
-                                data["Name"],
-                                "assets/Book2.png",
+                                data["AuthorName"],
+                                data["BookCode"],
+                                data["BookName"],
+                                data["BookURL"],
                                 data["Availability"],
                                 data["Requested"],
                                 widget.sapId,
                                 widget.Name);
                           }
-                          if (data['Name']
+                          if (data['AuthorName']
                               .toString()
                               .toLowerCase()
                               .startsWith(name.toLowerCase())) {
                             return listItem(
                                 context,
                                 index,
-                                data["Author"],
-                                data["Code"],
-                                data["Name"],
-                                "assets/Book2.png",
+                                data["AuthorName"],
+                                data["BookCode"],
+                                data["BookName"],
+                                data["BookURL"],
                                 data["Availability"],
                                 data["Requested"],
                                 widget.sapId,
