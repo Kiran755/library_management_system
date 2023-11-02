@@ -3,13 +3,13 @@ import 'package:firstapp/constants/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class BookViewer extends StatefulWidget {
+class BooksOverdueViewer extends StatefulWidget {
   final String value;
   final Color color;
   final String bookName, bookAuthor, bookCode, DueDate, IssueDate;
   // final String bookAuthor;
   // final String bookCode;
-  const BookViewer({
+  const BooksOverdueViewer({
     Key? key,
     required this.value,
     this.color = Colors.transparent,
@@ -20,12 +20,13 @@ class BookViewer extends StatefulWidget {
     required this.IssueDate,
   }) : super(key: key);
   @override
-  State<BookViewer> createState() => _BookViewerState();
+  State<BooksOverdueViewer> createState() => _BooksOverdueViewerState();
 }
 
-class _BookViewerState extends State<BookViewer> {
+class _BooksOverdueViewerState extends State<BooksOverdueViewer> {
   @override
   Widget build(BuildContext context) {
+    var Fine = FineCalculator(widget.DueDate);
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
@@ -86,6 +87,13 @@ class _BookViewerState extends State<BookViewer> {
                         fontWeight: FontWeight.w700,
                         color: Colors.red),
                   ),
+                  Text(
+                    "FINE DUE: Rs. ${Fine}",
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.red),
+                  ),
                 ],
               ),
             ),
@@ -93,5 +101,17 @@ class _BookViewerState extends State<BookViewer> {
         ],
       ),
     );
+  }
+
+  int FineCalculator(String dueDate) {
+    var Year = int.parse(dueDate.substring(6));
+    var Month = int.parse(dueDate.substring(3, 5));
+    var Day = int.parse(dueDate.substring(0, 2));
+
+    var date = DateTime(Year, Month, Day);
+    var difference = DateTime.now().difference(date).inDays;
+    var fine = difference * 5;
+
+    return fine;
   }
 }

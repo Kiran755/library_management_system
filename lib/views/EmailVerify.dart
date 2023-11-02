@@ -14,27 +14,51 @@ class _EmailVerifyState extends State<EmailVerify> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(244, 223, 195, 1.0),
       appBar: AppBar(
         title: const Text("Verify Email"),
+        backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
       ),
-      body: Column(
-        children: [
-          TextButton(
-            onPressed: () async {
-              final user = AuthService.firebase().currentUser;
-              AuthService.firebase().sendEmailVerification();
-            },
-            child: const Text("Send Verification Email!"),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Center(
+          child: Column(
+            children: [
+              TextButton(
+                onPressed: () async {
+                  final user = AuthService.firebase().currentUser;
+                  AuthService.firebase().sendEmailVerification();
+                },
+                style: TextButton.styleFrom(
+                  primary: Colors.white,
+                  backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
+                  minimumSize: const Size(250, 40),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                ),
+                child: const Text("Send Verification Email!"),
+              ),
+              const SizedBox(height: 20),
+              TextButton(
+                onPressed: () {
+                  AuthService.firebase().logOut();
+                  Navigator.of(context)
+                      .pushNamedAndRemoveUntil(loginRoute, (route) => false);
+                },
+                style: TextButton.styleFrom(
+                  primary: Colors.white,
+                  backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
+                  minimumSize: const Size(250, 40),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                ),
+                child: const Text("Restart"),
+              ),
+            ],
           ),
-          TextButton(
-            onPressed: () {
-              AuthService.firebase().logOut();
-              Navigator.of(context)
-                  .pushNamedAndRemoveUntil(loginRoute, (route) => false);
-            },
-            child: const Text("Restart"),
-          ),
-        ],
+        ),
       ),
     );
   }

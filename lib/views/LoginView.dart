@@ -1,10 +1,13 @@
+import 'package:bcrypt/bcrypt.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firstapp/constants/credentials.dart';
 import 'package:firstapp/constants/routes.dart';
 import 'package:firstapp/services/auth/auth_exceptions.dart';
 import 'package:firstapp/services/auth/auth_service.dart';
 import 'package:firstapp/utilities/ErrorDialog.dart';
 import 'package:firstapp/views/NotesView.dart';
 import 'package:firstapp/views/SearchTab.dart';
+import 'package:firstapp/views/forgot_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -90,12 +93,26 @@ class _LoginViewState extends State<LoginView> {
                                 controller: _password,
                               ),
                             ),
-                            const SizedBox(height: 20),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.85,
+                              child: Align(
+                                  alignment: Alignment.bottomLeft,
+                                  child: TextButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ForgotPasswordScreen()));
+                                    },
+                                    child: const Text("Forgot Password?"),
+                                  )),
+                            ),
                             TextButton(
                               onPressed: () async {
+                                // print(object)
                                 final email = _email.text;
                                 final password = _password.text;
-
                                 try {
                                   await AuthService.firebase()
                                       .logIn(email: email, password: password);
@@ -110,12 +127,14 @@ class _LoginViewState extends State<LoginView> {
                                   // if (!snapShot.exists) {
                                   //   db_ref.set({userUid: sapID});
                                   // }
-                                  if (email ==
-                                          "chetan159devadiga159@gmail.com" &&
-                                      password == "123456789") {
+                                  if (email == credentials["email"] &&
+                                      BCrypt.checkpw(
+                                          password,
+                                          credentials["password"] ??
+                                              "password")) {
                                     Navigator.of(context)
                                         .pushNamedAndRemoveUntil(
-                                            adminPage, (route) => false);
+                                            newAdminPage, (route) => false);
                                   } else if (user?.isEmailVerified ?? false) {
                                     final userUid = user?.uid;
                                     DatabaseReference db_ref = FirebaseDatabase

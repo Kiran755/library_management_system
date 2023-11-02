@@ -32,98 +32,46 @@ class _AdminPageState extends State<AdminPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          title: const Text("ADMIN PAGE"),
-          backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
-          actions: [
-            PopupMenuButton<MenuAction>(
-                icon: const Icon(
-                  Icons.more_vert,
-                  color: Color.fromARGB(255, 255, 255, 255),
+    return Padding(
+      padding: const EdgeInsets.only(top: 300),
+      child: Center(
+        child: Column(
+          children: [
+            TextButton(
+              onPressed: () {
+                issueBookViaQR();
+              },
+              style: TextButton.styleFrom(
+                primary: Colors.white,
+                backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
+                minimumSize: const Size(250, 40),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
                 ),
-                onSelected: (value) async {
-                  switch (value) {
-                    case MenuAction.logout:
-                      final shouldLogout = await ShowPopUp(context);
-                      if (shouldLogout) {
-                        await AuthService.firebase().logOut();
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                            loginRoute, (route) => false);
-                      } else {
-                        return;
-                      }
-                      break;
-                  }
-                },
-                itemBuilder: (context) {
-                  return const [
-                    PopupMenuItem<MenuAction>(
-                        value: MenuAction.logout, child: Text("Logout"))
-                  ];
-                })
-          ]),
-      backgroundColor: const Color.fromRGBO(244, 223, 195, 1.0),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 300),
-        child: Center(
-          child: Column(
-            children: [
-              TextButton(
-                onPressed: () {
-                  issueBookViaQR();
-                },
-                style: TextButton.styleFrom(
-                  primary: Colors.white,
-                  backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
-                  minimumSize: const Size(250, 40),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25),
-                  ),
+              ),
+              child: const Text("Issue Book"),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            TextButton(
+              onPressed: () {
+                returnBookViaQR();
+              },
+              style: TextButton.styleFrom(
+                primary: Colors.white,
+                backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
+                minimumSize: const Size(250, 40),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
                 ),
-                child: const Text("Issue Book"),
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextButton(
-                onPressed: () {
-                  returnBookViaQR();
-                },
-                style: TextButton.styleFrom(
-                  primary: Colors.white,
-                  backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
-                  minimumSize: const Size(250, 40),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                ),
-                child: const Text("Return Book"),
-              ),
-              Text(result),
-            ],
-          ),
+              child: const Text("Return Book"),
+            ),
+            Text(result),
+          ],
         ),
       ),
-      // body: StreamBuilder(
-      //     stream: _cols.snapshots(),
-      //     builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-      //       if (streamSnapshot.hasData) {
-      //         return ListView.builder(
-      //             itemCount: streamSnapshot.data!.docs.length,
-      //             itemBuilder: (context, index) {
-      //               final DocumentSnapshot documentSnapshot =
-      //                   streamSnapshot.data!.docs[index];
-      //               return Card(
-      //                   margin: const EdgeInsets.all(10),
-      //                   child: ListTile(
-      //                     title: Text(documentSnapshot['Name']),
-      //                     subtitle: Text(documentSnapshot['Author']),
-      //                   ));
-      //             });
-      //       }
-      //       return const Center(child: CircularProgressIndicator());
-      //     }),
     );
   }
 

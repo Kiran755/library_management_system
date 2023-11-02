@@ -34,18 +34,18 @@ class _IssueBookState extends State<IssueBook> {
     super.dispose();
   }
 
-  void getSap() async {
-    try {
-      final qrCode = await FlutterBarcodeScanner.scanBarcode(
-          "#fff666", "Cancel", true, ScanMode.BARCODE);
-      if (!mounted) return;
-      setState(() {
-        result = qrCode;
-      });
-    } catch (e) {
-      result = "Failed to Scan QR CODE";
-    }
-  }
+  // void getSap() async {
+  //   try {
+  //     final qrCode = await FlutterBarcodeScanner.scanBarcode(
+  //         "#fff666", "Cancel", true, ScanMode.BARCODE);
+  //     if (!mounted) return;
+  //     setState(() {
+  //       result = qrCode;
+  //     });
+  //   } catch (e) {
+  //     result = "Failed to Scan QR CODE";
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -66,13 +66,17 @@ class _IssueBookState extends State<IssueBook> {
               if (!snapshot.hasData) {
                 return const Text("Loading");
               }
-              var bookName = (snapshot.data as DocumentSnapshot)['Name'];
-              var bookAuthor = (snapshot.data as DocumentSnapshot)['Author'];
-              var bookCode = (snapshot.data as DocumentSnapshot)['Code'];
+              var bookName = (snapshot.data as DocumentSnapshot)['BookName'];
+              var bookAuthor =
+                  (snapshot.data as DocumentSnapshot)['AuthorName'];
+              var bookCode = (snapshot.data as DocumentSnapshot)['BookCode'];
+              var bookURL = (snapshot.data as DocumentSnapshot)['BookURL'];
+              var Availability =
+                  (snapshot.data as DocumentSnapshot)['Availability'];
               return Column(
                 children: [
                   BookIssueView(
-                      value: "assets/Book2.png",
+                      value: bookURL,
                       bookName: bookName,
                       bookAuthor: bookAuthor,
                       bookCode: bookCode),
@@ -97,21 +101,21 @@ class _IssueBookState extends State<IssueBook> {
                       ),
                     ),
                   ),
-                  ElevatedButton(
-                      onPressed: () {
-                        getSap();
-                      },
-                      style: TextButton.styleFrom(
-                        primary: Colors.white,
-                        backgroundColor:
-                            const Color.fromRGBO(158, 90, 100, 1.0),
-                        minimumSize: const Size(250, 40),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                      ),
-                      child: const Text("SCAN")),
-                  Text(result),
+                  // ElevatedButton(
+                  //     onPressed: () {
+                  //       getSap();
+                  //     },
+                  //     style: TextButton.styleFrom(
+                  //       primary: Colors.white,
+                  //       backgroundColor:
+                  //           const Color.fromRGBO(158, 90, 100, 1.0),
+                  //       minimumSize: const Size(250, 40),
+                  //       shape: RoundedRectangleBorder(
+                  //         borderRadius: BorderRadius.circular(25),
+                  //       ),
+                  //     ),
+                  //     child: const Text("SCAN")),
+                  // Text(result),
                   ElevatedButton(
                       onPressed: () async {
                         final result = await ShowMessage(context);
@@ -122,19 +126,16 @@ class _IssueBookState extends State<IssueBook> {
                         DateTime date = DateTime.now();
                         DateTime due_date =
                             DateTime(date.year, date.month, date.day + 7);
-                        String formattedDate = DateFormat("yMd").format(date);
+                        String formattedDate =
+                            DateFormat("dd/MM/yyyy").format(date);
                         String formattedDueDate =
-                            DateFormat("yMd").format(due_date);
+                            DateFormat("dd/MM/yyyy").format(due_date);
                         // print(formattedDate);
                         DatabaseReference ref = FirebaseDatabase.instance
                             .ref("Database/SAPID/$sapid");
                         final Listsnapshot =
                             await ref.child('BooksAssigned').get();
-                        DatabaseReference ReqRef = FirebaseDatabase.instance
-                            .ref(
-                                "Database/Requests/${bookCode}/SapId/${sapid}");
-                        final data = await ReqRef.child("position").get();
-                        if (data.exists && data.value != 1) {
+                        if (Availability == "Not Available") {
                           print(
                               "Book is requested by someone else. Please wait for your turn");
                           showError(context,
@@ -161,53 +162,54 @@ class _IssueBookState extends State<IssueBook> {
                               "BookName": bookName,
                               "BookAuthor": bookAuthor,
                               "Issued Date": formattedDate,
-                              "Due Date": formattedDueDate
+                              "Due Date": formattedDueDate,
+                              "BookURL": bookURL
                             },
                           });
-                          if (data.exists && data.value == 1) {
-                            final query = await ReqRef.child("TimeStamp").get();
-                            final TimeStamp = int.parse(query.value.toString());
-                            print("Time Stamep : $TimeStamp");
-                            await ReqRef.remove();
-                            final docRef = await FirebaseFirestore.instance
-                                .collection(widget.colName)
-                                .doc(widget.docName)
-                                .update(
-                                    {"Requested": FieldValue.increment(-1)});
+                          // if (data.exists && data.value == 1) {
+                          //   final query = await ReqRef.child("TimeStamp").get();
+                          //   final TimeStamp = int.parse(query.value.toString());
+                          //   print("Time Stamep : $TimeStamp");
+                          //   await ReqRef.remove();
+                          //   final docRef = await FirebaseFirestore.instance
+                          //       .collection(widget.colName)
+                          //       .doc(widget.docName)
+                          //       .update(
+                          //           {"Requested": FieldValue.increment(-1)});
 
-                            await ref
-                                .child("BooksRequested/$bookCode")
-                                .remove();
-                            final dataRef = FirebaseDatabase.instance
-                                .ref("Database/Requests/${bookCode}");
-                            final temp = await dataRef.child("requested").get();
-                            final ReqVal = double.parse(temp.value.toString());
-                            await dataRef
-                                .child("requested")
-                                .update({"requested": ReqVal - 1});
-                            await dataRef
-                                .child("SapId")
-                                .orderByChild("TimeStamp")
-                                .get()
-                                .then((snapshot) {
-                              final data = Map<String, dynamic>.from(
-                                  snapshot.value as dynamic);
-                              data.forEach((key, value) {
-                                print(
-                                    "This the timestamp : ${value["TimeStamp"]} and this the key : $key");
-                                print(
-                                    "type of TimeSTamp : ${TimeStamp.runtimeType}");
-                                print(
-                                    "Type of timeStamp frm the var: ${value["TimeStamp"].runtimeType}");
-                                int DBTimeStamp = value["TimeStamp"];
-                                if (DBTimeStamp > TimeStamp) {
-                                  print("hey I am working");
-                                  dataRef.child("SapId/$key").update(
-                                      {"position": value['position'] - 1});
-                                }
-                              });
-                            });
-                          }
+                          //   await ref
+                          //       .child("BooksRequested/$bookCode")
+                          //       .remove();
+                          //   final dataRef = FirebaseDatabase.instance
+                          //       .ref("Database/Requests/${bookCode}");
+                          //   final temp = await dataRef.child("requested").get();
+                          //   final ReqVal = double.parse(temp.value.toString());
+                          //   await dataRef
+                          //       .child("requested")
+                          //       .update({"requested": ReqVal - 1});
+                          //   await dataRef
+                          //       .child("SapId")
+                          //       .orderByChild("TimeStamp")
+                          //       .get()
+                          //       .then((snapshot) {
+                          //     final data = Map<String, dynamic>.from(
+                          //         snapshot.value as dynamic);
+                          //     data.forEach((key, value) {
+                          //       print(
+                          //           "This the timestamp : ${value["TimeStamp"]} and this the key : $key");
+                          //       print(
+                          //           "type of TimeSTamp : ${TimeStamp.runtimeType}");
+                          //       print(
+                          //           "Type of timeStamp frm the var: ${value["TimeStamp"].runtimeType}");
+                          //       int DBTimeStamp = value["TimeStamp"];
+                          //       if (DBTimeStamp > TimeStamp) {
+                          //         print("hey I am working");
+                          //         dataRef.child("SapId/$key").update(
+                          //             {"position": value['position'] - 1});
+                          //       }
+                          //     });
+                          //   });
+                          // }
                           FirebaseFirestore.instance
                               .collection(widget.colName)
                               .doc(widget.docName)

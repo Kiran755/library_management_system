@@ -51,13 +51,15 @@ class _ReturnBookState extends State<ReturnBook> {
               if (!snapshot.hasData) {
                 return const Text("Loading");
               }
-              var bookName = (snapshot.data as DocumentSnapshot)['Name'];
-              var bookAuthor = (snapshot.data as DocumentSnapshot)['Author'];
-              var bookCode = (snapshot.data as DocumentSnapshot)['Code'];
+              var bookName = (snapshot.data as DocumentSnapshot)['BookName'];
+              var bookAuthor =
+                  (snapshot.data as DocumentSnapshot)['AuthorName'];
+              var bookCode = (snapshot.data as DocumentSnapshot)['BookCode'];
+              var bookURL = (snapshot.data as DocumentSnapshot)["BookURL"];
               return Column(
                 children: [
                   BookIssueView(
-                      value: "assets/Book2.png",
+                      value: bookURL,
                       bookName: bookName,
                       bookAuthor: bookAuthor,
                       bookCode: bookCode),
@@ -127,14 +129,15 @@ class _ReturnBookState extends State<ReturnBook> {
                               "BookName": bookName,
                               "BookAuthor": bookAuthor,
                               "Issued Date": issueDate,
-                              "Returned Date": formattedDate
+                              "Returned Date": formattedDate,
+                              "BookURL": bookURL
                             },
                           });
                           FirebaseFirestore.instance
                               .collection(widget.colName)
                               .doc(widget.docName)
                               .update({"Availability": "Avaiable"});
-                          showError(context, "Book Assigned Successfully");
+                          showError(context, "Book Returned Successfully");
                         }
                       },
                       style: TextButton.styleFrom(

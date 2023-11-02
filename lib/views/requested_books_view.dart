@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:firstapp/views/SearchBookViewer.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/src/widgets/framework.dart';
 
 class RequestedBookView extends StatefulWidget {
   final String SapId;
+
   const RequestedBookView({Key? key, required this.SapId}) : super(key: key);
 
   @override
@@ -17,6 +19,7 @@ class RequestedBookView extends StatefulWidget {
 }
 
 class _RequestedBookViewState extends State<RequestedBookView> {
+  List<String> queueData = [];
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -59,17 +62,33 @@ class _RequestedBookViewState extends State<RequestedBookView> {
                     query: FirebaseDatabase.instance
                         .ref("Database/SAPID/${widget.SapId}/BooksRequested"),
                     itemBuilder: (context, snapshot, animation, index) {
-                      var requests = FirebaseDatabase.instance
-                          .ref(
-                              "Database/Requests/${snapshot.child("BookCode").value.toString()}/requested")
+                      FirebaseFirestore.instance
+                          .collection("${snapshot.child("DomainName")}")
+                          .doc("${snapshot.child("BookCode")}")
                           .get()
-                          .then((snapshot) => snapshot.value.toString());
-                      print(requests);
+                          .then((DocumentSnapshot documentSnapshot) {
+                        // Check if the document exists.
+                        if (documentSnapshot.exists) {
+                          // Access the data from the document.
+                          Map<String, dynamic> data =
+                              documentSnapshot.data() as Map<String, dynamic>;
+                          List<String> firestoreQueue =
+                              data['queue'] as List<String>;
+                          setState(() {
+                            queueData = List.from(firestoreQueue);
+                          });
+                        } else {
+                          // Document does not exist.
+                          // Handle the case where the document is not found.
+                        }
+                      }).catchError((error) {
+                        // Handle any errors that occur during the operation.
+                      });
                       return Column(
                         children: [
                           RequestBookViewer(
                             color: Colors.white,
-                            value: "assets/Book2.png",
+                            value: snapshot.child("BookURL").value.toString(),
                             issuedDate: snapshot
                                 .child("RequestedDate")
                                 .value
@@ -82,6 +101,9 @@ class _RequestedBookViewState extends State<RequestedBookView> {
                             bookCode:
                                 snapshot.child("BookCode").value.toString(),
                             sapId: widget.SapId,
+                            DomainName:
+                                snapshot.child("Domain").value.toString(),
+                            queueData: queueData,
                           ),
                           const Divider(
                             indent: 10,

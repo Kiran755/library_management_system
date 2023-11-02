@@ -56,7 +56,7 @@ class _HistoryViewState extends State<HistoryView> {
             child: SingleChildScrollView(
               child: Expanded(
                 child: SizedBox(
-                  height: 500,
+                  height: 550,
                   child: FirebaseAnimatedList(
                     defaultChild: Center(child: CircularProgressIndicator()),
                     query: FirebaseDatabase.instance
@@ -66,7 +66,7 @@ class _HistoryViewState extends State<HistoryView> {
                         children: [
                           BookViewer(
                             color: Colors.white,
-                            value: "assets/Book2.png",
+                            value: snapshot.child("BookURL").value.toString(),
                             DueDate: snapshot
                                 .child("Returned Date")
                                 .value
