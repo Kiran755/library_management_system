@@ -37,7 +37,7 @@ class FirstScreen extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   Navigator.of(context)
-                      .pushNamedAndRemoveUntil(registerRoute, (route) => false);
+                      .pushNamedAndRemoveUntil(loginRoute, (route) => false);
                 },
                 style: TextButton.styleFrom(
                   primary: Colors.white,
