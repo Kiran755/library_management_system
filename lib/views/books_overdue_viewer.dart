@@ -1,7 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firstapp/constants/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class BooksOverdueViewer extends StatefulWidget {
   final String value;
@@ -36,16 +34,16 @@ class _BooksOverdueViewerState extends State<BooksOverdueViewer> {
         children: [
           Padding(
             padding: const EdgeInsets.all(10.0),
-            child: Container(
+            child: SizedBox(
+                height: 180,
+                width: 100,
                 child: CachedNetworkImage(
                   imageUrl: widget.value,
                   progressIndicatorBuilder: (context, url, downloadProgress) =>
                       CircularProgressIndicator(
                           value: downloadProgress.progress),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
-                ),
-                height: 180,
-                width: 100),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                )),
           ),
           Flexible(
             child: Container(
@@ -74,7 +72,7 @@ class _BooksOverdueViewerState extends State<BooksOverdueViewer> {
                   ),
                   Text(
                     "Issued Date: ${widget.IssueDate}",
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w700,
                         color: Colors.red),
@@ -82,14 +80,14 @@ class _BooksOverdueViewerState extends State<BooksOverdueViewer> {
                   const SizedBox(height: 5),
                   Text(
                     "Due Date: ${widget.DueDate}",
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w700,
                         color: Colors.red),
                   ),
                   Text(
-                    "FINE DUE: Rs. ${Fine}",
-                    style: TextStyle(
+                    "FINE DUE: Rs. $Fine",
+                    style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w700,
                         color: Colors.red),

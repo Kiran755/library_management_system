@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firstapp/views/BooksOverDue.dart';
 import 'package:firstapp/views/IssueBook.dart';
 import 'package:firstapp/views/ReturnBook.dart';
@@ -29,10 +28,10 @@ class _NewAdminPageState extends State<NewAdminPage> {
 
   @override
   Widget build(BuildContext context) {
-    tabs = [AdminPage(), BooksInCirculation(), BooksOverdue()];
+    tabs = [const AdminPage(), const BooksInCirculation(), const BooksOverdue()];
     // bool _active = false;
 
-    void _handleTap(int index) {
+    void handleTap(int index) {
       setState(() {
         _currentIndex = index;
       });
@@ -94,7 +93,7 @@ class _NewAdminPageState extends State<NewAdminPage> {
               label: "Fine",
             ),
           ],
-          onTap: _handleTap,
+          onTap: handleTap,
         ),
       ),
       // body: StreamBuilder(

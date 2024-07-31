@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class FeedBack extends StatefulWidget {
   const FeedBack({Key? key}) : super(key: key);
@@ -17,9 +15,9 @@ class _FeedBackState extends State<FeedBack> {
       appBar: AppBar(
         title: const Text("Feedback"),
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
           child: Column(
-        children: [const Text("Give feedback to admin : ")],
+        children: [Text("Give feedback to admin : ")],
       )),
     );
   }

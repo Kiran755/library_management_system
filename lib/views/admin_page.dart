@@ -1,14 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firstapp/views/IssueBook.dart';
 import 'package:firstapp/views/ReturnBook.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-
-import '../constants/routes.dart';
-import '../enum/menuActions.dart';
-import '../main.dart';
-import '../services/auth/auth_service.dart';
 
 class AdminPage extends StatefulWidget {
   const AdminPage({Key? key}) : super(key: key);
@@ -22,7 +16,7 @@ class _AdminPageState extends State<AdminPage> {
   var colNameIndex = 0;
   var result = 'QR CODE RESULT';
   bool _active = false;
-  int _currentIndex = 0;
+  final int _currentIndex = 0;
 
   void _handleTap() {
     setState(() {
@@ -42,7 +36,7 @@ class _AdminPageState extends State<AdminPage> {
                 issueBookViaQR();
               },
               style: TextButton.styleFrom(
-                primary: Colors.white,
+                foregroundColor: Colors.white,
                 backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
                 minimumSize: const Size(250, 40),
                 shape: RoundedRectangleBorder(
@@ -59,7 +53,7 @@ class _AdminPageState extends State<AdminPage> {
                 returnBookViaQR();
               },
               style: TextButton.styleFrom(
-                primary: Colors.white,
+                foregroundColor: Colors.white,
                 backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
                 minimumSize: const Size(250, 40),
                 shape: RoundedRectangleBorder(

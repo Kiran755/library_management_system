@@ -8,17 +8,17 @@ Future<void> scheduleNotification(DateTime date) async {
       FlutterLocalNotificationsPlugin();
 
   // Define notification details
-  final AndroidNotificationDetails androidPlatformChannelSpecifics =
+  const AndroidNotificationDetails androidPlatformChannelSpecifics =
       AndroidNotificationDetails(
           'your_channel_id', // Replace with your own channel ID
           'Scheduled Notifications');
 
-  final NotificationDetails platformChannelSpecifics = NotificationDetails(
+  const NotificationDetails platformChannelSpecifics = NotificationDetails(
     android: androidPlatformChannelSpecifics,
   );
 
   // Define when to trigger the notification (e.g., 1 hour from now)
-  final DateTime scheduledDate = DateTime.now().add(Duration(hours: 1));
+  final DateTime scheduledDate = DateTime.now().add(const Duration(hours: 1));
 
   // Schedule the notification
   String timeZoneName = 'Asia/Kolkata'; // Replace with your desired time zone

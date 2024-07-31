@@ -25,11 +25,11 @@ void main() async {
 
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
-  final AndroidInitializationSettings initializationSettingsAndroid =
+  const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings(
           '@mipmap/ic_launcher'); // Replace 'app_icon' with your app's launcher icon.
 
-  final InitializationSettings initializationSettings = InitializationSettings(
+  const InitializationSettings initializationSettings = InitializationSettings(
       android: initializationSettingsAndroid,
       iOS: null,
       macOS: null,
@@ -45,7 +45,7 @@ void main() async {
     routes: {
       loginRoute: (context) => const LoginView(),
       registerRoute: (context) => const RegisterView(),
-      notesRoute: (context) => NotesView(
+      notesRoute: (context) => const NotesView(
             Name: "",
             SapID: "",
           ),
@@ -74,7 +74,7 @@ class HomePage extends StatelessWidget {
               print(user);
               if (user != null) {
                 if (user.isEmailVerified) {
-                  return NotesView(Name: "", SapID: "");
+                  return const NotesView(Name: "", SapID: "");
                 } else {
                   return const EmailVerify();
                 }

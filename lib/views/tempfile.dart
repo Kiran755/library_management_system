@@ -1,9 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firstapp/views/book_viewer.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class SearchView extends StatefulWidget {
   const SearchView({Key? key}) : super(key: key);
@@ -36,13 +32,13 @@ class _SearchViewState extends State<SearchView> {
             },
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
+        const Padding(
+          padding: EdgeInsets.all(8.0),
           child: Row(
             children: [
-              const Text("14 Searches"),
+              Text("14 Searches"),
               Expanded(child: SizedBox()),
-              const Text("Filters:Some Filter"),
+              Text("Filters:Some Filter"),
             ],
           ),
         ),
@@ -54,7 +50,7 @@ class _SearchViewState extends State<SearchView> {
                 var fromDatabase = snapshots.data!.docs[1].data();
                 print("Data from database $fromDatabase");
                 return (snapshots.connectionState == ConnectionState.waiting)
-                    ? Center(child: CircularProgressIndicator())
+                    ? const Center(child: CircularProgressIndicator())
                     : ListView.builder(
                         itemCount: snapshots.data!.docs.length,
                         itemBuilder: (context, index) {

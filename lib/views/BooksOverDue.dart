@@ -1,10 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'package:firstapp/views/book_viewer.dart';
 import 'package:firstapp/views/books_overdue_viewer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'dart:developer';
 
 class BooksOverdue extends StatefulWidget {
@@ -26,7 +23,7 @@ class _BooksOverdueState extends State<BooksOverdue> {
       body: Container(
         child: FirebaseAnimatedList(
           defaultChild: const Center(
-            child: const CircularProgressIndicator(),
+            child: CircularProgressIndicator(),
           ),
           query: FirebaseDatabase.instance.ref("Database/SAPID"),
           itemBuilder: ((context, snapshot, animation, index) {
@@ -71,7 +68,7 @@ class _BooksOverdueState extends State<BooksOverdue> {
                           child: dueBooks.isEmpty
                               ? null
                               : Text("SAPID : ${snapshot.key}",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontWeight:
                                         FontWeight.bold, // Make text bold
                                     fontSize: 20.0, // Set the font size
@@ -81,7 +78,7 @@ class _BooksOverdueState extends State<BooksOverdue> {
                     ),
                     Column(
                       children: dueBooks.isEmpty
-                          ? [Text("No Books are Overdue!")]
+                          ? [const Text("No Books are Overdue!")]
                           : dueBooks
                               .map((Book) => BooksOverdueViewer(
                                   value: Book.child("BookURL").value.toString(),

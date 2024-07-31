@@ -3,8 +3,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firstapp/utilities/ErrorDialog.dart';
 import 'package:firstapp/utilities/showMessage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:intl/intl.dart';
 
 import 'BookIssueView.dart';
@@ -92,18 +90,18 @@ class _ReturnBookState extends State<ReturnBook> {
                         }
                         final String sapid = _sapid.text;
                         DateTime date = DateTime.now();
-                        DateTime due_date =
+                        DateTime dueDate =
                             DateTime(date.year, date.month, date.day + 7);
                         String formattedDate = DateFormat("yMd").format(date);
                         String formattedDueDate =
-                            DateFormat("yMd").format(due_date);
+                            DateFormat("yMd").format(dueDate);
                         // print(formattedDate);
                         DatabaseReference ref = FirebaseDatabase.instance
                             .ref("Database/SAPID/$sapid");
                         final Listsnapshot =
                             await ref.child('BooksAssigned').get();
                         if (Listsnapshot.exists) {
-                          if (Listsnapshot.children.length == 0) {
+                          if (Listsnapshot.children.isEmpty) {
                             print("No Books to return!");
                             showError(context, "There are no assigned books!");
                             return;
@@ -141,8 +139,7 @@ class _ReturnBookState extends State<ReturnBook> {
                         }
                       },
                       style: TextButton.styleFrom(
-                        primary: Colors.white,
-                        backgroundColor:
+                        foregroundColor: Colors.white, backgroundColor:
                             const Color.fromRGBO(158, 90, 100, 1.0),
                         minimumSize: const Size(250, 40),
                         shape: RoundedRectangleBorder(

@@ -3,8 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firstapp/utilities/ErrorDialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:intl/intl.dart';
 
 import '../utilities/showMessage.dart';
@@ -53,7 +51,9 @@ class _SearchBookViewerState extends State<SearchBookViewer> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
-                    child: Container(
+                    child: SizedBox(
+                        height: 180,
+                        width: 120,
                         child: CachedNetworkImage(
                           imageUrl: widget.value,
                           progressIndicatorBuilder:
@@ -61,10 +61,8 @@ class _SearchBookViewerState extends State<SearchBookViewer> {
                                   CircularProgressIndicator(
                                       value: downloadProgress.progress),
                           errorWidget: (context, url, error) =>
-                              Icon(Icons.error),
-                        ),
-                        height: 180,
-                        width: 120),
+                              const Icon(Icons.error),
+                        )),
                   ),
                   Flexible(
                     child: Container(
@@ -200,8 +198,7 @@ class _SearchBookViewerState extends State<SearchBookViewer> {
                                   }
                                 },
                                 style: TextButton.styleFrom(
-                                  primary: Colors.white,
-                                  backgroundColor:
+                                  foregroundColor: Colors.white, backgroundColor:
                                       const Color.fromRGBO(158, 90, 100, 1.0),
                                   minimumSize: const Size(100, 25),
                                   shape: RoundedRectangleBorder(

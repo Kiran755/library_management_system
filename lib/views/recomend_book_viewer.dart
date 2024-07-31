@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class RecommendBookViewer extends StatefulWidget {
   final Color color;
@@ -41,7 +39,7 @@ class _RecommendBookViewerState extends State<RecommendBookViewer> {
                     width: MediaQuery.of(context).size.width * 0.85,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.0),
-                        color: Color.fromARGB(255, 255, 255, 255)),
+                        color: const Color.fromARGB(255, 255, 255, 255)),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Column(

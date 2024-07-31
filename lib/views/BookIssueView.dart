@@ -1,6 +1,4 @@
-import 'package:firstapp/constants/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class BookIssueView extends StatefulWidget {
   final String value;
@@ -30,7 +28,9 @@ class _BookIssueViewState extends State<BookIssueView> {
       ),
       child: Row(
         children: [
-          Container(
+          SizedBox(
+              height: 180,
+              width: 100,
               child: Image.network(
                 widget.value,
                 loadingBuilder: (BuildContext context, Widget child,
@@ -47,9 +47,7 @@ class _BookIssueViewState extends State<BookIssueView> {
                     ),
                   );
                 },
-              ),
-              height: 180,
-              width: 100),
+              )),
           Flexible(
             child: Container(
               decoration: BoxDecoration(

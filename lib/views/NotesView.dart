@@ -10,7 +10,7 @@ import '../main.dart';
 
 class NotesView extends StatefulWidget {
   final String Name, SapID;
-  NotesView({Key? key, required this.Name, required this.SapID})
+  const NotesView({Key? key, required this.Name, required this.SapID})
       : super(key: key);
 
   @override
@@ -64,17 +64,17 @@ class _NotesViewState extends State<NotesView> {
           child: InkWell(
             onTap: _handleTap,
             child: CircleAvatar(
-              backgroundColor: Color.fromRGBO(249, 221, 150, 0.51),
+              backgroundColor: const Color.fromRGBO(249, 221, 150, 0.51),
               child: Text(
                 initials,
-                style: TextStyle(color: Colors.black),
+                style: const TextStyle(color: Colors.black),
               ),
             ),
           ),
         ),
         title: Text(
           widget.Name,
-          style: TextStyle(color: Colors.black),
+          style: const TextStyle(color: Colors.black),
         ),
         actions: [
           PopupMenuButton<MenuAction>(

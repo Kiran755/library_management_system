@@ -2,8 +2,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:firstapp/views/book_viewer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'dart:developer';
 
 class BooksInCirculation extends StatefulWidget {
@@ -25,7 +23,7 @@ class _BooksInCirculationState extends State<BooksInCirculation> {
       body: Container(
         child: FirebaseAnimatedList(
           defaultChild: const Center(
-            child: const CircularProgressIndicator(),
+            child: CircularProgressIndicator(),
           ),
           query: FirebaseDatabase.instance.ref("Database/SAPID"),
           itemBuilder: ((context, snapshot, animation, index) {
@@ -53,7 +51,7 @@ class _BooksInCirculationState extends State<BooksInCirculation> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text("SAPID : ${snapshot.key}",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.bold, // Make text bold
                                 fontSize: 20.0, // Set the font size
                               )),

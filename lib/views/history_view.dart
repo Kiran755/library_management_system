@@ -2,8 +2,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:firstapp/views/book_viewer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class HistoryView extends StatefulWidget {
   final String SapId;
@@ -25,8 +23,8 @@ class _HistoryViewState extends State<HistoryView> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          children: const [
+        const Row(
+          children: [
             Expanded(
                 child: Divider(
               indent: 10,
@@ -58,7 +56,7 @@ class _HistoryViewState extends State<HistoryView> {
                 child: SizedBox(
                   height: 550,
                   child: FirebaseAnimatedList(
-                    defaultChild: Center(child: CircularProgressIndicator()),
+                    defaultChild: const Center(child: CircularProgressIndicator()),
                     query: FirebaseDatabase.instance
                         .ref("Database/SAPID/${widget.SapId}/BooksHistory"),
                     itemBuilder: (context, snapshot, animation, index) {

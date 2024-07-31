@@ -2,16 +2,9 @@ import 'dart:convert';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'package:firstapp/services/auth/auth_service.dart';
-import 'package:firstapp/services/notifi_service.dart';
 import 'package:firstapp/views/book_viewer.dart';
 import 'package:firstapp/views/recomend_book_viewer.dart';
-import 'package:firstapp/views/requestBookViewer.dart';
-import 'package:firstapp/views/scheduled_notifications.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 
 class SearchTab extends StatefulWidget {
@@ -45,8 +38,8 @@ class _SearchTabState extends State<SearchTab> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Row(
-                  children: const [
+                const Row(
+                  children: [
                     Expanded(
                         child: Divider(
                       indent: 10,
@@ -85,7 +78,7 @@ class _SearchTabState extends State<SearchTab> {
                       height: 500,
                       child: FirebaseAnimatedList(
                         defaultChild: const Center(
-                            child: const CircularProgressIndicator()),
+                            child: CircularProgressIndicator()),
                         query: FirebaseDatabase.instance.ref(
                             "Database/SAPID/${widget.SapId}/BooksAssigned"),
                         itemBuilder: (context, snapshot, animation, index) {
@@ -147,8 +140,8 @@ class _SearchTabState extends State<SearchTab> {
                     ),
                   ),
                 ),
-                Row(
-                  children: const [
+                const Row(
+                  children: [
                     Expanded(
                         child: Divider(
                       indent: 10,

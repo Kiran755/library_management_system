@@ -1,10 +1,6 @@
-import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import '../utilities/showMessage.dart';
 
@@ -54,7 +50,9 @@ class _RequestBookViewerState extends State<RequestBookViewer> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Container(
+                  child: SizedBox(
+                      height: 180,
+                      width: 100,
                       child: Image.network(
                         widget.value,
                         loadingBuilder: (BuildContext context, Widget child,
@@ -71,9 +69,7 @@ class _RequestBookViewerState extends State<RequestBookViewer> {
                             ),
                           );
                         },
-                      ),
-                      height: 180,
-                      width: 100),
+                      )),
                 ),
                 Flexible(
                   child: Container(
@@ -124,15 +120,15 @@ class _RequestBookViewerState extends State<RequestBookViewer> {
                               final colName =
                                   widget.bookCode.substring(0, colNameIndex);
                               DocumentReference<Map<String, dynamic>>
-                                  firestore_ref = FirebaseFirestore.instance
+                                  firestoreRef = FirebaseFirestore.instance
                                       .collection(colName)
-                                      .doc("${widget.bookCode}");
+                                      .doc(widget.bookCode);
                               DocumentSnapshot<Map<String, dynamic>> docSnap =
-                                  await firestore_ref.get();
+                                  await firestoreRef.get();
                               if (docSnap.exists) {
-                                firestore_ref.update({
+                                firestoreRef.update({
                                   'queue': FieldValue.arrayRemove(
-                                      ["${widget.sapId}"])
+                                      [(widget.sapId)])
                                 });
                               }
 
@@ -189,8 +185,7 @@ class _RequestBookViewerState extends State<RequestBookViewer> {
                               // });
                             },
                             style: TextButton.styleFrom(
-                              primary: Colors.white,
-                              backgroundColor:
+                              foregroundColor: Colors.white, backgroundColor:
                                   const Color.fromRGBO(158, 90, 100, 1.0),
                               minimumSize: const Size(100, 25),
                               shape: RoundedRectangleBorder(
@@ -218,14 +213,14 @@ class _RequestBookViewerState extends State<RequestBookViewer> {
     Map<String, dynamic> hello =
         documentSnapshot.data() as Map<String, dynamic>;
 
-    print("hello ${hello}");
+    print("hello $hello");
     int queuePosition = 0;
     List<dynamic> queue = hello['queue'] as List<dynamic>;
     queuePosition = queue.indexOf(widget.sapId);
     // setState(() {
     //   position = queuePosition + 1;
     // });
-    print("POSITION AT : ${position}");
+    print("POSITION AT : $position");
     return queuePosition + 1;
   }
 }

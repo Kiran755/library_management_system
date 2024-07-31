@@ -1,7 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:firstapp/constants/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class BookViewer extends StatefulWidget {
   final String value;
@@ -35,16 +33,16 @@ class _BookViewerState extends State<BookViewer> {
         children: [
           Padding(
             padding: const EdgeInsets.all(10.0),
-            child: Container(
+            child: SizedBox(
+                height: 180,
+                width: 100,
                 child: CachedNetworkImage(
                   imageUrl: widget.value,
                   progressIndicatorBuilder: (context, url, downloadProgress) =>
                       CircularProgressIndicator(
                           value: downloadProgress.progress),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
-                ),
-                height: 180,
-                width: 100),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                )),
           ),
           Flexible(
             child: Container(
@@ -73,7 +71,7 @@ class _BookViewerState extends State<BookViewer> {
                   ),
                   Text(
                     "Issued Date: ${widget.IssueDate}",
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w700,
                         color: Colors.red),
@@ -81,7 +79,7 @@ class _BookViewerState extends State<BookViewer> {
                   const SizedBox(height: 5),
                   Text(
                     "Due Date: ${widget.DueDate}",
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w700,
                         color: Colors.red),

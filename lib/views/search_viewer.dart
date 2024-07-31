@@ -1,13 +1,7 @@
-import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firstapp/views/SearchBookViewer.dart';
-import 'package:firstapp/views/book_viewer.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import '../constants/domains.dart';
 
 class SearchView extends StatefulWidget {
   final String sapId, Name;
@@ -220,9 +214,9 @@ class _SearchViewState extends State<SearchView> {
                       padding: const EdgeInsets.only(left: 20, top: 10),
                       child: DecoratedBox(
                         decoration: BoxDecoration(
-                            color: Color.fromARGB(177, 181, 113, 123),
+                            color: const Color.fromARGB(177, 181, 113, 123),
                             borderRadius: BorderRadius.circular(5),
-                            boxShadow: <BoxShadow>[
+                            boxShadow: const <BoxShadow>[
                               BoxShadow(
                                   color: Color.fromRGBO(
                                       0, 0, 0, 0.3), //shadow for button
@@ -237,14 +231,14 @@ class _SearchViewState extends State<SearchView> {
                               child: DropdownButton(
                                   isExpanded: true,
                                   dropdownColor:
-                                      Color.fromARGB(255, 181, 113, 123),
+                                      const Color.fromARGB(255, 181, 113, 123),
                                   value: dropdownvalue,
                                   items: items.map((String items) {
                                     return DropdownMenuItem(
                                       value: items,
                                       child: Text(
                                         items,
-                                        style: TextStyle(color: Colors.white),
+                                        style: const TextStyle(color: Colors.white),
                                       ),
                                     );
                                   }).toList(),

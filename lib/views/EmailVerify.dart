@@ -30,8 +30,7 @@ class _EmailVerifyState extends State<EmailVerify> {
                   AuthService.firebase().sendEmailVerification();
                 },
                 style: TextButton.styleFrom(
-                  primary: Colors.white,
-                  backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
+                  foregroundColor: Colors.white, backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
                   minimumSize: const Size(250, 40),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25),
@@ -47,8 +46,7 @@ class _EmailVerifyState extends State<EmailVerify> {
                       .pushNamedAndRemoveUntil(loginRoute, (route) => false);
                 },
                 style: TextButton.styleFrom(
-                  primary: Colors.white,
-                  backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
+                  foregroundColor: Colors.white, backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
                   minimumSize: const Size(250, 40),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25),

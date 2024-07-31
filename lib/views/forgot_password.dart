@@ -1,9 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firstapp/services/auth/firebase_auth_provider.dart';
 import 'package:firstapp/utilities/ErrorDialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({Key? key}) : super(key: key);
@@ -56,15 +53,14 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         email: email_controller.text.toString());
                     showError(context,
                         "We have sent the email to reset your password. Please check the inbox or spam folder of your email");
-                  } on FirebaseAuthException catch (e) {
+                  } on FirebaseAuthException {
                     showError(context,
                         "Error Occured Please Try again after some time!");
 // show the snackbar here
                   }
                 },
                 style: TextButton.styleFrom(
-                  primary: Colors.white,
-                  backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
+                  foregroundColor: Colors.white, backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
                   minimumSize: const Size(250, 40),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25),

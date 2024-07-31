@@ -6,7 +6,6 @@ import 'package:firstapp/services/auth/auth_exceptions.dart';
 import 'package:firstapp/services/auth/auth_service.dart';
 import 'package:firstapp/utilities/ErrorDialog.dart';
 import 'package:firstapp/views/NotesView.dart';
-import 'package:firstapp/views/SearchTab.dart';
 import 'package:firstapp/views/forgot_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -103,7 +102,7 @@ class _LoginViewState extends State<LoginView> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  ForgotPasswordScreen()));
+                                                  const ForgotPasswordScreen()));
                                     },
                                     child: const Text("Forgot Password?"),
                                   )),
@@ -137,11 +136,11 @@ class _LoginViewState extends State<LoginView> {
                                             newAdminPage, (route) => false);
                                   } else if (user?.isEmailVerified ?? false) {
                                     final userUid = user?.uid;
-                                    DatabaseReference db_ref = FirebaseDatabase
+                                    DatabaseReference dbRef = FirebaseDatabase
                                         .instance
                                         .ref("Database/Names");
                                     final snapShot =
-                                        await db_ref.child("$userUid").get();
+                                        await dbRef.child("$userUid").get();
                                     if (snapShot.exists) {
                                       final sapID = snapShot
                                           .child("SapId")
@@ -182,8 +181,7 @@ class _LoginViewState extends State<LoginView> {
                                 }
                               },
                               style: TextButton.styleFrom(
-                                primary: Colors.white,
-                                backgroundColor:
+                                foregroundColor: Colors.white, backgroundColor:
                                     const Color.fromRGBO(158, 90, 100, 1.0),
                                 minimumSize: const Size(250, 40),
                                 shape: RoundedRectangleBorder(

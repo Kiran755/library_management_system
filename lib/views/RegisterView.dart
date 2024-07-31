@@ -157,13 +157,13 @@ class _RegisterViewState extends State<RegisterView> {
                                         await AuthService.firebase().createUser(
                                             email: email, password: password);
                                     final uid = userCredentials.uid;
-                                    DatabaseReference db_ref = FirebaseDatabase
+                                    DatabaseReference dbRef = FirebaseDatabase
                                         .instance
                                         .ref("Database/Names");
                                     final snapShot =
-                                        await db_ref.child(uid).get();
+                                        await dbRef.child(uid).get();
                                     if (!snapShot.exists) {
-                                      db_ref
+                                      dbRef
                                           .child(uid)
                                           .set({"Name": Name, "SapId": sapid});
                                     }
@@ -178,8 +178,7 @@ class _RegisterViewState extends State<RegisterView> {
                                   }
                                 },
                                 style: TextButton.styleFrom(
-                                  primary: Colors.white,
-                                  backgroundColor:
+                                  foregroundColor: Colors.white, backgroundColor:
                                       const Color.fromRGBO(158, 90, 100, 1.0),
                                   minimumSize: const Size(250, 40),
                                   shape: RoundedRectangleBorder(

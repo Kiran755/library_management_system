@@ -40,8 +40,7 @@ class FirstScreen extends StatelessWidget {
                       .pushNamedAndRemoveUntil(loginRoute, (route) => false);
                 },
                 style: TextButton.styleFrom(
-                  primary: Colors.white,
-                  backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
+                  foregroundColor: Colors.white, backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
                   padding: const EdgeInsets.all(10),
                   minimumSize: const Size(250, 50),
                   shape: RoundedRectangleBorder(

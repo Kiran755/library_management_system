@@ -3,9 +3,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firstapp/utilities/ErrorDialog.dart';
 import 'package:firstapp/views/BookIssueView.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:intl/intl.dart';
 
 import '../utilities/showMessage.dart';
@@ -124,12 +121,12 @@ class _IssueBookState extends State<IssueBook> {
                         }
                         final String sapid = _sapid.text;
                         DateTime date = DateTime.now();
-                        DateTime due_date =
+                        DateTime dueDate =
                             DateTime(date.year, date.month, date.day + 7);
                         String formattedDate =
                             DateFormat("dd/MM/yyyy").format(date);
                         String formattedDueDate =
-                            DateFormat("dd/MM/yyyy").format(due_date);
+                            DateFormat("dd/MM/yyyy").format(dueDate);
                         // print(formattedDate);
                         DatabaseReference ref = FirebaseDatabase.instance
                             .ref("Database/SAPID/$sapid");
@@ -218,8 +215,7 @@ class _IssueBookState extends State<IssueBook> {
                         }
                       },
                       style: TextButton.styleFrom(
-                        primary: Colors.white,
-                        backgroundColor:
+                        foregroundColor: Colors.white, backgroundColor:
                             const Color.fromRGBO(158, 90, 100, 1.0),
                         minimumSize: const Size(250, 40),
                         shape: RoundedRectangleBorder(
