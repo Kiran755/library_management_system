@@ -23,40 +23,44 @@ class _HistoryViewState extends State<HistoryView> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const SizedBox(height: 16),
         const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(
-                child: Divider(
-              indent: 10,
-              endIndent: 10,
-              thickness: 1,
-              color: Color.fromARGB(150, 12, 11, 11),
-            )),
+            // Expanded(
+            //     child: Divider(
+            //   indent: 10,
+            //   endIndent: 10,
+            //   thickness: 1,
+            //   color: Color.fromARGB(150, 12, 11, 11),
+            // )),
             Text(
               "HISTORY",
               style: TextStyle(
                   fontSize: 22,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700),
+                  // color: Colors.white,
+                  fontWeight: FontWeight.w600),
             ),
-            Expanded(
-                child: Divider(
-              indent: 10,
-              endIndent: 10,
-              thickness: 1,
-              color: Color.fromARGB(150, 12, 11, 11),
-            )),
+            // Expanded(
+            //     child: Divider(
+            //   indent: 10,
+            //   endIndent: 10,
+            //   thickness: 1,
+            //   color: Color.fromARGB(150, 12, 11, 11),
+            // )),
           ],
         ),
+        const SizedBox(height: 4),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: SingleChildScrollView(
               child: Expanded(
                 child: SizedBox(
                   height: 550,
                   child: FirebaseAnimatedList(
-                    defaultChild: const Center(child: CircularProgressIndicator()),
+                    defaultChild:
+                        const Center(child: CircularProgressIndicator()),
                     query: FirebaseDatabase.instance
                         .ref("Database/SAPID/${widget.SapId}/BooksHistory"),
                     itemBuilder: (context, snapshot, animation, index) {
@@ -82,7 +86,7 @@ class _HistoryViewState extends State<HistoryView> {
                             indent: 10,
                             endIndent: 10,
                             thickness: 5,
-                            color: Color.fromRGBO(158, 90, 100, 1.0),
+                            color: Colors.transparent,
                           ),
                         ],
                       );

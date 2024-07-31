@@ -29,19 +29,26 @@ class _BookViewerState extends State<BookViewer> {
         borderRadius: BorderRadius.circular(10.0),
         color: widget.color,
       ),
+      padding: const EdgeInsets.all(12.0),
       child: Row(
         children: [
           Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.only(right: 16),
             child: SizedBox(
                 height: 180,
-                width: 100,
-                child: CachedNetworkImage(
-                  imageUrl: widget.value,
-                  progressIndicatorBuilder: (context, url, downloadProgress) =>
-                      CircularProgressIndicator(
-                          value: downloadProgress.progress),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                width: 120,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: CachedNetworkImage(
+                    imageUrl: widget.value,
+                    fit: BoxFit.cover,
+                    progressIndicatorBuilder:
+                        (context, url, downloadProgress) =>
+                            CircularProgressIndicator(
+                                value: downloadProgress.progress),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
+                  ),
                 )),
           ),
           Flexible(
@@ -56,31 +63,32 @@ class _BookViewerState extends State<BookViewer> {
                   Text(
                     widget.bookName,
                     style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.w800),
+                        fontSize: 14, fontWeight: FontWeight.w800),
                   ),
                   Text(
                     widget.bookAuthor,
                     textAlign: TextAlign.left,
+                    style: const TextStyle(fontSize: 14),
                   ),
                   Text(
                     widget.bookCode,
                     textAlign: TextAlign.left,
                   ),
                   const SizedBox(
-                    height: 40,
+                    height: 20,
                   ),
                   Text(
                     "Issued Date: ${widget.IssueDate}",
                     style: const TextStyle(
-                        fontSize: 16,
+                        fontSize: 13,
                         fontWeight: FontWeight.w700,
-                        color: Colors.red),
+                        color: Colors.blue),
                   ),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 1),
                   Text(
                     "Due Date: ${widget.DueDate}",
                     style: const TextStyle(
-                        fontSize: 16,
+                        fontSize: 13,
                         fontWeight: FontWeight.w700,
                         color: Colors.red),
                   ),

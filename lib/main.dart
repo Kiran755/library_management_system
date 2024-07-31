@@ -13,7 +13,7 @@ import 'package:firstapp/views/admin_page.dart';
 import 'package:firstapp/views/books_circulation.dart';
 import 'package:firstapp/views/feedback_page.dart';
 import 'package:firstapp/views/new_admin_menu.dart';
-import 'package:firstapp/views/profle_page.dart';
+import 'package:firstapp/views/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -39,6 +39,7 @@ void main() async {
   await Firebase.initializeApp();
   runApp(MaterialApp(
     title: 'Flutter Demo',
+    debugShowCheckedModeBanner: false,
     theme:
         ThemeData(primarySwatch: Colors.blue, fontFamily: 'Montserrat-Black'),
     home: const FirstScreen(),

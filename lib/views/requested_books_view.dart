@@ -19,38 +19,41 @@ class _RequestedBookViewState extends State<RequestedBookView> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const SizedBox(height: 16),
         const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(
-                child: Divider(
-              indent: 10,
-              endIndent: 10,
-              thickness: 1,
-              color: Color.fromARGB(150, 12, 11, 11),
-            )),
+            // Expanded(
+            //     child: Divider(
+            //   indent: 10,
+            //   endIndent: 10,
+            //   thickness: 1,
+            //   color: Color.fromARGB(150, 12, 11, 11),
+            // )),
             Text(
               "BOOKS REQUESTED",
               style: TextStyle(
                   fontSize: 22,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700),
+                  // color: Colors.white,
+                  fontWeight: FontWeight.w600),
             ),
-            Expanded(
-                child: Divider(
-              indent: 10,
-              endIndent: 10,
-              thickness: 1,
-              color: Color.fromARGB(150, 12, 11, 11),
-            )),
+            // Expanded(
+            //     child: Divider(
+            //   indent: 10,
+            //   endIndent: 10,
+            //   thickness: 1,
+            //   color: Color.fromARGB(150, 12, 11, 11),
+            // )),
           ],
         ),
+        const SizedBox(height: 4),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: SingleChildScrollView(
               child: Expanded(
                 child: SizedBox(
-                  height: 500,
+                  height: 540,
                   child: FirebaseAnimatedList(
                     defaultChild:
                         const Center(child: CircularProgressIndicator()),
@@ -104,7 +107,7 @@ class _RequestedBookViewState extends State<RequestedBookView> {
                             indent: 10,
                             endIndent: 10,
                             thickness: 5,
-                            color: Color.fromRGBO(158, 90, 100, 1.0),
+                            color: Colors.transparent,
                           ),
                         ],
                       );

@@ -37,11 +37,11 @@ class _SearchBookViewerState extends State<SearchBookViewer> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          color: const Color.fromRGBO(244, 223, 195, 1.0),
+          borderRadius: BorderRadius.circular(8.0),
+          color: Colors.white,
         ),
         child: Column(
           children: [
@@ -54,14 +54,18 @@ class _SearchBookViewerState extends State<SearchBookViewer> {
                     child: SizedBox(
                         height: 180,
                         width: 120,
-                        child: CachedNetworkImage(
-                          imageUrl: widget.value,
-                          progressIndicatorBuilder:
-                              (context, url, downloadProgress) =>
-                                  CircularProgressIndicator(
-                                      value: downloadProgress.progress),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: CachedNetworkImage(
+                            imageUrl: widget.value,
+                            fit: BoxFit.cover,
+                            progressIndicatorBuilder:
+                                (context, url, downloadProgress) =>
+                                    CircularProgressIndicator(
+                                        value: downloadProgress.progress),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
+                          ),
                         )),
                   ),
                   Flexible(
@@ -85,38 +89,40 @@ class _SearchBookViewerState extends State<SearchBookViewer> {
                             Text(
                               widget.bookAuthor,
                               textAlign: TextAlign.left,
+                              style: const TextStyle(fontSize: 14),
                             ),
                             const SizedBox(
-                              height: 20,
+                              height: 16,
                             ),
                             Text(
                               widget.Availability,
                               style: widget.Availability == "Not Available"
                                   ? const TextStyle(
-                                      fontSize: 14,
+                                      fontSize: 13,
                                       fontWeight: FontWeight.w700,
                                       color: Colors.red)
                                   : const TextStyle(
-                                      fontSize: 14,
+                                      fontSize: 13,
                                       fontWeight: FontWeight.w700,
                                       color: Colors.green),
                             ),
-                            const SizedBox(height: 5),
+                            const SizedBox(height: 2),
                             Text(
                               "Domain: ${widget.DomainName}",
                               style: const TextStyle(
-                                  fontSize: 14,
+                                  fontSize: 13,
                                   fontWeight: FontWeight.w700,
                                   color: Colors.lightBlue),
                             ),
-                            const SizedBox(height: 5),
+                            // const SizedBox(height: 0),
                             Text(
                               "In Queue: ${widget.queue.length}",
                               style: const TextStyle(
-                                  fontSize: 14,
+                                  fontSize: 13,
                                   fontWeight: FontWeight.w700,
                                   color: Colors.lightBlue),
                             ),
+                            const SizedBox(height: 2),
                             Visibility(
                               visible:
                                   widget.queue.contains(widget.sapId) == false,
@@ -198,11 +204,12 @@ class _SearchBookViewerState extends State<SearchBookViewer> {
                                   }
                                 },
                                 style: TextButton.styleFrom(
-                                  foregroundColor: Colors.white, backgroundColor:
+                                  foregroundColor: Colors.white,
+                                  backgroundColor:
                                       const Color.fromRGBO(158, 90, 100, 1.0),
                                   minimumSize: const Size(100, 25),
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25),
+                                    borderRadius: BorderRadius.circular(8),
                                   ),
                                 ),
                                 child: const Text("Request Book"),

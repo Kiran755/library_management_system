@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firstapp/constants/colors.dart';
 
 class FeedBack extends StatefulWidget {
   const FeedBack({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class _FeedBackState extends State<FeedBack> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(218, 170, 99, 1),
+      backgroundColor: bgColour,
       appBar: AppBar(
         title: const Text("Feedback"),
       ),

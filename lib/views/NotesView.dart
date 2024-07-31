@@ -7,6 +7,7 @@ import 'package:firstapp/views/search_viewer.dart';
 import '../constants/routes.dart';
 import '../enum/menuActions.dart';
 import '../main.dart';
+import 'package:firstapp/constants/colors.dart';
 
 class NotesView extends StatefulWidget {
   final String Name, SapID;
@@ -50,7 +51,7 @@ class _NotesViewState extends State<NotesView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(218, 170, 99, 1),
+      backgroundColor: bgColour,
       appBar: AppBar(
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
@@ -97,17 +98,17 @@ class _NotesViewState extends State<NotesView> {
                   case MenuAction.profile:
                     Navigator.pushNamed(context, profile);
                     break;
-                  case MenuAction.feedback:
+                  // case MenuAction.feedback:
                     // Navigator.pushNamed(context, feedBack,arguments: );
-                    break;
+                    // break;
                 }
               },
               itemBuilder: (context) {
                 return const [
                   PopupMenuItem<MenuAction>(
                       value: MenuAction.profile, child: Text("Profile")),
-                  PopupMenuItem<MenuAction>(
-                      value: MenuAction.feedback, child: Text("Feedback")),
+                  // PopupMenuItem<MenuAction>(
+                      // value: MenuAction.feedback, child: Text("Feedback")),
                   PopupMenuItem<MenuAction>(
                       value: MenuAction.logout, child: Text("Logout"))
                 ];
@@ -120,8 +121,12 @@ class _NotesViewState extends State<NotesView> {
         child: BottomNavigationBar(
           currentIndex: _currentIndex,
           type: BottomNavigationBarType.fixed,
-          unselectedItemColor: const Color.fromRGBO(158, 90, 100, 0.7),
           selectedItemColor: const Color.fromRGBO(158, 90, 100, 1),
+          unselectedItemColor: const Color.fromRGBO(158, 90, 100, 0.7),
+          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w700),
+          unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w700),
+          selectedIconTheme: const IconThemeData(size: 28),
+          unselectedIconTheme: const IconThemeData(size: 22),
           items: const [
             BottomNavigationBarItem(
               icon: Icon(

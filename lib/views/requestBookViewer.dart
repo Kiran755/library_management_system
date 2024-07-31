@@ -44,31 +44,37 @@ class _RequestBookViewerState extends State<RequestBookViewer> {
           return (Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              color: widget.color,
+              color: Colors.white,
             ),
+            padding: const EdgeInsets.all(12.0),
             child: Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.only(right: 16),
                   child: SizedBox(
                       height: 180,
-                      width: 100,
-                      child: Image.network(
-                        widget.value,
-                        loadingBuilder: (BuildContext context, Widget child,
-                            ImageChunkEvent? loadingProgress) {
-                          if (loadingProgress == null) {
-                            return child;
-                          }
-                          return Center(
-                            child: CircularProgressIndicator(
-                              value: loadingProgress.expectedTotalBytes != null
-                                  ? loadingProgress.cumulativeBytesLoaded /
-                                      loadingProgress.expectedTotalBytes!
-                                  : null,
-                            ),
-                          );
-                        },
+                      width: 120,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Image.network(
+                          widget.value,
+                          fit: BoxFit.cover,
+                          loadingBuilder: (BuildContext context, Widget child,
+                              ImageChunkEvent? loadingProgress) {
+                            if (loadingProgress == null) {
+                              return child;
+                            }
+                            return Center(
+                              child: CircularProgressIndicator(
+                                value: loadingProgress.expectedTotalBytes !=
+                                        null
+                                    ? loadingProgress.cumulativeBytesLoaded /
+                                        loadingProgress.expectedTotalBytes!
+                                    : null,
+                              ),
+                            );
+                          },
+                        ),
                       )),
                 ),
                 Flexible(
@@ -83,29 +89,30 @@ class _RequestBookViewerState extends State<RequestBookViewer> {
                         Text(
                           widget.bookName,
                           style: const TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w800),
+                              fontSize: 14, fontWeight: FontWeight.w800),
                         ),
                         Text(
                           widget.bookAuthor,
                           textAlign: TextAlign.left,
+                          style: const TextStyle(fontSize: 14),
                         ),
                         const SizedBox(
-                          height: 60,
+                          height: 16,
                         ),
                         Text(
                           "Issued Date: ${widget.issuedDate}",
                           style: const TextStyle(
-                              fontSize: 16,
+                              fontSize: 13,
                               fontWeight: FontWeight.w700,
-                              color: Colors.red),
+                              color: Colors.blue),
                         ),
-                        const SizedBox(height: 5),
+                        const SizedBox(height: 1),
                         Text(
                           "Your position : ${snapshot.data}",
                           style: const TextStyle(
-                              fontSize: 16,
+                              fontSize: 13,
                               fontWeight: FontWeight.w700,
-                              color: Colors.red),
+                              color: Colors.blue),
                         ),
                         TextButton(
                             onPressed: () async {
@@ -127,8 +134,8 @@ class _RequestBookViewerState extends State<RequestBookViewer> {
                                   await firestoreRef.get();
                               if (docSnap.exists) {
                                 firestoreRef.update({
-                                  'queue': FieldValue.arrayRemove(
-                                      [(widget.sapId)])
+                                  'queue':
+                                      FieldValue.arrayRemove([(widget.sapId)])
                                 });
                               }
 
@@ -185,11 +192,12 @@ class _RequestBookViewerState extends State<RequestBookViewer> {
                               // });
                             },
                             style: TextButton.styleFrom(
-                              foregroundColor: Colors.white, backgroundColor:
+                              foregroundColor: Colors.white,
+                              backgroundColor:
                                   const Color.fromRGBO(158, 90, 100, 1.0),
                               minimumSize: const Size(100, 25),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25),
+                                borderRadius: BorderRadius.circular(8),
                               ),
                             ),
                             child: const Text("Remove"))

@@ -34,51 +34,54 @@ class _SearchTabState extends State<SearchTab> {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         child: Padding(
-          padding: const EdgeInsets.only(top: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
           child: SingleChildScrollView(
             child: Column(
               children: [
                 const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
-                        child: Divider(
-                      indent: 10,
-                      endIndent: 10,
-                      thickness: 1,
-                      color: Color.fromARGB(150, 12, 11, 11),
-                    )),
+                    // Expanded(
+                    //     child: Divider(
+                    //   indent: 10,
+                    //   endIndent: 10,
+                    //   thickness: 1.4,
+                    //   color: Color.fromRGBO(101, 101, 101, 0.2),
+                    // )),
                     Text(
                       "BOOKS ASSIGNED",
                       style: TextStyle(
                           fontSize: 22,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700),
+                          // color: Colors.white,
+                          fontWeight: FontWeight.w600),
                     ),
-                    Expanded(
-                        child: Divider(
-                      indent: 10,
-                      endIndent: 10,
-                      thickness: 1,
-                      color: Color.fromARGB(150, 12, 11, 11),
-                    )),
+                    // Expanded(
+                    //     child: Divider(
+                    //   indent: 10,
+                    //   endIndent: 10,
+                    //   thickness: 1.4,
+                    //   color: Color.fromRGBO(101, 101, 101, 0.2),
+                    // )),
                   ],
                 ),
+                const SizedBox(height: 16),
                 Container(
+                  padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
-                    color: const Color.fromRGBO(234, 223, 209, 0.6),
+                    color: Color.fromARGB(255, 255, 255, 255),
                     border: Border.all(
                       style: BorderStyle.solid,
                       color: const Color.fromRGBO(158, 90, 100, 1.0),
-                      width: 5,
+                      width: 2,
                     ),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: Expanded(
                     child: SizedBox(
-                      height: 500,
+                      height: 400,
                       child: FirebaseAnimatedList(
-                        defaultChild: const Center(
-                            child: CircularProgressIndicator()),
+                        defaultChild:
+                            const Center(child: CircularProgressIndicator()),
                         query: FirebaseDatabase.instance.ref(
                             "Database/SAPID/${widget.SapId}/BooksAssigned"),
                         itemBuilder: (context, snapshot, animation, index) {
@@ -130,7 +133,7 @@ class _SearchTabState extends State<SearchTab> {
                               const Divider(
                                 indent: 10,
                                 endIndent: 10,
-                                thickness: 5,
+                                thickness: 2,
                                 color: Color.fromRGBO(158, 90, 100, 1.0),
                               ),
                             ],
@@ -140,38 +143,42 @@ class _SearchTabState extends State<SearchTab> {
                     ),
                   ),
                 ),
+                const SizedBox(height: 16),
                 const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
-                        child: Divider(
-                      indent: 10,
-                      endIndent: 10,
-                      thickness: 1,
-                      color: Color.fromARGB(150, 12, 11, 11),
-                    )),
+                    // Expanded(
+                    //     child: Divider(
+                    //   indent: 10,
+                    //   endIndent: 10,
+                    //   thickness: 1,
+                    //   color: Color.fromARGB(150, 12, 11, 11),
+                    // )),
                     Text(
                       "BOOKS RECOMMENDED",
                       style: TextStyle(
                           fontSize: 22,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700),
+                          // color: Colors.white,
+                          fontWeight: FontWeight.w600),
                     ),
-                    Expanded(
-                        child: Divider(
-                      indent: 10,
-                      endIndent: 10,
-                      thickness: 1,
-                      color: Color.fromARGB(150, 12, 11, 11),
-                    )),
+                    // Expanded(
+                    //     child: Divider(
+                    //   indent: 10,
+                    //   endIndent: 10,
+                    //   thickness: 1,
+                    //   color: Color.fromARGB(150, 12, 11, 11),
+                    // )),
                   ],
                 ),
+                const SizedBox(height: 16),
                 Container(
+                  padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
-                    color: const Color.fromRGBO(234, 223, 209, 0.6),
+                    color: Color.fromARGB(255, 255, 255, 255),
                     border: Border.all(
                       style: BorderStyle.solid,
                       color: const Color.fromRGBO(158, 90, 100, 1.0),
-                      width: 5,
+                      width: 2,
                     ),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
@@ -243,7 +250,7 @@ class _SearchTabState extends State<SearchTab> {
                                 ),
                               ));
                             } else {
-                              return const Text("No Data");
+                              return const Text("No data found");
                             }
                         }
                       }),

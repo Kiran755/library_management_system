@@ -1,7 +1,7 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firstapp/views/SearchBookViewer.dart';
 import 'package:flutter/material.dart';
+import 'package:firstapp/constants/colors.dart';
 
 class SearchView extends StatefulWidget {
   final String sapId, Name;
@@ -185,7 +185,7 @@ class _SearchViewState extends State<SearchView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color.fromRGBO(218, 170, 99, 1),
+        backgroundColor: bgColour,
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(120.0),
           child: Container(
@@ -193,20 +193,23 @@ class _SearchViewState extends State<SearchView> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 AppBar(
-                    automaticallyImplyLeading: false,
-                    backgroundColor: const Color.fromRGBO(218, 170, 99, 1),
-                    title: Card(
-                      child: TextField(
-                        decoration: const InputDecoration(
-                            prefixIcon: Icon(Icons.search),
-                            hintText: 'Search...'),
-                        onChanged: (val) {
-                          setState(() {
-                            name = val;
-                          });
-                        },
+                  automaticallyImplyLeading: false,
+                  backgroundColor: bgColour,
+                  title: Card(
+                    child: TextField(
+                      decoration: const InputDecoration(
+                        prefixIcon: Icon(Icons.search),
+                        hintText: 'Search...',
+                        border: InputBorder.none,
                       ),
-                    )),
+                      onChanged: (val) {
+                        setState(() {
+                          name = val;
+                        });
+                      },
+                    ),
+                  ),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -214,14 +217,18 @@ class _SearchViewState extends State<SearchView> {
                       padding: const EdgeInsets.only(left: 20, top: 10),
                       child: DecoratedBox(
                         decoration: BoxDecoration(
-                            color: const Color.fromARGB(177, 181, 113, 123),
-                            borderRadius: BorderRadius.circular(5),
-                            boxShadow: const <BoxShadow>[
-                              BoxShadow(
-                                  color: Color.fromRGBO(
-                                      0, 0, 0, 0.3), //shadow for button
-                                  blurRadius: 1) //blur radius of shadow
-                            ]),
+                          color: const Color.fromARGB(255, 181, 113, 123),
+                          borderRadius: BorderRadius.circular(5),
+                          // boxShadow: const <BoxShadow>[
+                          //   BoxShadow(
+                          //     color: Color.fromRGBO(
+                          //         0, 0, 0, 0.3), //shadow for button
+                          //     blurRadius: 0,
+                          //     spreadRadius: 0,
+                          //     offset: Offset(0, 1)
+                          //   ), //blur radius of shadow
+                          // ],
+                        ),
                         child: Padding(
                           padding: const EdgeInsets.only(left: 30, right: 30),
                           child: SizedBox(
@@ -232,13 +239,18 @@ class _SearchViewState extends State<SearchView> {
                                   isExpanded: true,
                                   dropdownColor:
                                       const Color.fromARGB(255, 181, 113, 123),
+                                  icon: const Icon(
+                                    Icons.arrow_drop_down,
+                                    color: Colors.white,
+                                  ),
                                   value: dropdownvalue,
                                   items: items.map((String items) {
                                     return DropdownMenuItem(
                                       value: items,
                                       child: Text(
                                         items,
-                                        style: const TextStyle(color: Colors.white),
+                                        style: const TextStyle(
+                                            color: Colors.white),
                                       ),
                                     );
                                   }).toList(),
@@ -268,7 +280,7 @@ class _SearchViewState extends State<SearchView> {
                     child: CircularProgressIndicator(),
                   )
                 : Container(
-                    color: const Color.fromRGBO(218, 170, 99, 1),
+                    color: bgColour,
                     child: ListView.builder(
                         itemCount: snapshots.data!.docs.length,
                         itemBuilder: (context, index) {
