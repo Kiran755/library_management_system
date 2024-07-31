@@ -1,5 +1,6 @@
 import 'package:firstapp/services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:firstapp/constants/colors.dart';
 
 import '../constants/routes.dart';
 
@@ -14,7 +15,7 @@ class _EmailVerifyState extends State<EmailVerify> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(244, 223, 195, 1.0),
+      backgroundColor: bgColour,
       appBar: AppBar(
         title: const Text("Verify Email"),
         backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
@@ -30,7 +31,8 @@ class _EmailVerifyState extends State<EmailVerify> {
                   AuthService.firebase().sendEmailVerification();
                 },
                 style: TextButton.styleFrom(
-                  foregroundColor: Colors.white, backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
+                  foregroundColor: Colors.white,
+                  backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
                   minimumSize: const Size(250, 40),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25),
@@ -46,7 +48,8 @@ class _EmailVerifyState extends State<EmailVerify> {
                       .pushNamedAndRemoveUntil(loginRoute, (route) => false);
                 },
                 style: TextButton.styleFrom(
-                  foregroundColor: Colors.white, backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
+                  foregroundColor: Colors.white,
+                  backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
                   minimumSize: const Size(250, 40),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25),

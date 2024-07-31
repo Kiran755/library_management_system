@@ -1,5 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
+import 'package:firstapp/constants/colors.dart';
 import 'package:firstapp/views/book_viewer.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer';
@@ -16,10 +17,14 @@ class _BooksInCirculationState extends State<BooksInCirculation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Books In Circulation"),
-        backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
+        title: const Text(
+          "Books In Circulation",
+          style: TextStyle(fontWeight: FontWeight.w600),
+        ),
+        centerTitle: true,
+        backgroundColor: bgColour,
       ),
-      backgroundColor: const Color.fromRGBO(244, 223, 195, 1.0),
+      backgroundColor: bgColour,
       body: Container(
         child: FirebaseAnimatedList(
           defaultChild: const Center(
@@ -43,19 +48,18 @@ class _BooksInCirculationState extends State<BooksInCirculation> {
               //     Map.fromIterable(snapshot.child("BooksAssigned").children);
               // log(childrens["BookURL"]);
               return Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 child: Column(
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text("SAPID : ${snapshot.key}",
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold, // Make text bold
-                                fontSize: 20.0, // Set the font size
-                              )),
-                        ),
+                        Text("SAPID : ${snapshot.key}",
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold, // Make text bold
+                              fontSize: 20.0, // Set the font size
+                            )),
                       ],
                     ),
                     Column(

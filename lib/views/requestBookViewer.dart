@@ -88,6 +88,7 @@ class _RequestBookViewerState extends State<RequestBookViewer> {
                       children: [
                         Text(
                           widget.bookName,
+                          textAlign: TextAlign.left,
                           style: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.w800),
                         ),

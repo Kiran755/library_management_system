@@ -6,6 +6,7 @@ import 'package:firstapp/views/books_circulation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:firstapp/constants/colors.dart';
 
 import '../constants/routes.dart';
 import '../enum/menuActions.dart';
@@ -28,7 +29,11 @@ class _NewAdminPageState extends State<NewAdminPage> {
 
   @override
   Widget build(BuildContext context) {
-    tabs = [const AdminPage(), const BooksInCirculation(), const BooksOverdue()];
+    tabs = [
+      const AdminPage(),
+      const BooksInCirculation(),
+      const BooksOverdue()
+    ];
     // bool _active = false;
 
     void handleTap(int index) {
@@ -39,8 +44,11 @@ class _NewAdminPageState extends State<NewAdminPage> {
 
     return Scaffold(
       appBar: AppBar(
-          title: const Text("ADMIN PAGE"),
+          title: const Text("ADMIN PAGE",
+              style: TextStyle(fontWeight: FontWeight.w600)),
+          centerTitle: true,
           backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
+          foregroundColor: Colors.white,
           actions: [
             PopupMenuButton<MenuAction>(
                 icon: const Icon(
@@ -68,15 +76,19 @@ class _NewAdminPageState extends State<NewAdminPage> {
                   ];
                 })
           ]),
-      backgroundColor: const Color.fromRGBO(244, 223, 195, 1.0),
+      backgroundColor: bgColour,
       body: tabs[_currentIndex],
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 2),
         child: BottomNavigationBar(
           currentIndex: _currentIndex,
           type: BottomNavigationBarType.fixed,
-          unselectedItemColor: const Color.fromRGBO(158, 90, 100, 0.7),
           selectedItemColor: const Color.fromRGBO(158, 90, 100, 1),
+          unselectedItemColor: const Color.fromRGBO(158, 90, 100, 0.7),
+          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w700),
+          unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.w700),
+          selectedIconTheme: const IconThemeData(size: 28),
+          unselectedIconTheme: const IconThemeData(size: 22),
           items: const [
             BottomNavigationBarItem(
               icon: Icon(

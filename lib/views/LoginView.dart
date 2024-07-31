@@ -9,6 +9,7 @@ import 'package:firstapp/views/NotesView.dart';
 import 'package:firstapp/views/forgot_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:firstapp/constants/colors.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -38,7 +39,7 @@ class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(244, 223, 195, 1.0),
+      backgroundColor: bgColour,
       body: Padding(
         padding: const EdgeInsets.all(7.0),
         child: FutureBuilder(
@@ -181,7 +182,8 @@ class _LoginViewState extends State<LoginView> {
                                 }
                               },
                               style: TextButton.styleFrom(
-                                foregroundColor: Colors.white, backgroundColor:
+                                foregroundColor: Colors.white,
+                                backgroundColor:
                                     const Color.fromRGBO(158, 90, 100, 1.0),
                                 minimumSize: const Size(250, 40),
                                 shape: RoundedRectangleBorder(

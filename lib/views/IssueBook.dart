@@ -4,6 +4,7 @@ import 'package:firstapp/utilities/ErrorDialog.dart';
 import 'package:firstapp/views/BookIssueView.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:firstapp/constants/colors.dart';
 
 import '../utilities/showMessage.dart';
 
@@ -47,13 +48,13 @@ class _IssueBookState extends State<IssueBook> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color.fromRGBO(244, 223, 195, 1.0),
+        backgroundColor: bgColour,
         appBar: AppBar(
           title: const Text("Issue Book"),
           backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection(widget.colName)
@@ -215,7 +216,8 @@ class _IssueBookState extends State<IssueBook> {
                         }
                       },
                       style: TextButton.styleFrom(
-                        foregroundColor: Colors.white, backgroundColor:
+                        foregroundColor: Colors.white,
+                        backgroundColor:
                             const Color.fromRGBO(158, 90, 100, 1.0),
                         minimumSize: const Size(250, 40),
                         shape: RoundedRectangleBorder(

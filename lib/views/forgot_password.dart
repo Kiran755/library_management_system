@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firstapp/utilities/ErrorDialog.dart';
 import 'package:flutter/material.dart';
+import 'package:firstapp/constants/colors.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           title: const Text("FORGOT PASSWORD"),
           backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
         ),
-        backgroundColor: const Color.fromRGBO(244, 223, 195, 1.0),
+        backgroundColor: bgColour,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           // crossAxisAlignment: CrossAxisAlignment.center,
@@ -60,7 +61,8 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   }
                 },
                 style: TextButton.styleFrom(
-                  foregroundColor: Colors.white, backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
+                  foregroundColor: Colors.white,
+                  backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
                   minimumSize: const Size(250, 40),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25),

@@ -4,6 +4,7 @@ import 'package:firstapp/utilities/ErrorDialog.dart';
 import 'package:firstapp/utilities/showMessage.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:firstapp/constants/colors.dart';
 
 import 'BookIssueView.dart';
 
@@ -33,7 +34,7 @@ class _ReturnBookState extends State<ReturnBook> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color.fromRGBO(244, 223, 195, 1.0),
+        backgroundColor: bgColour,
         appBar: AppBar(
           backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
           title: const Text("Return Book"),
@@ -139,7 +140,8 @@ class _ReturnBookState extends State<ReturnBook> {
                         }
                       },
                       style: TextButton.styleFrom(
-                        foregroundColor: Colors.white, backgroundColor:
+                        foregroundColor: Colors.white,
+                        backgroundColor:
                             const Color.fromRGBO(158, 90, 100, 1.0),
                         minimumSize: const Size(250, 40),
                         shape: RoundedRectangleBorder(

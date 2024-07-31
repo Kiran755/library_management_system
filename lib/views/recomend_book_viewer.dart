@@ -47,6 +47,7 @@ class _RecommendBookViewerState extends State<RecommendBookViewer> {
                         children: [
                           Text(
                             widget.bookName,
+                            textAlign: TextAlign.left,
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w800),
                           ),

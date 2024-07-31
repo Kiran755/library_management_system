@@ -3,6 +3,7 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:firstapp/views/books_overdue_viewer.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer';
+import 'package:firstapp/constants/colors.dart';
 
 class BooksOverdue extends StatefulWidget {
   const BooksOverdue({Key? key}) : super(key: key);
@@ -16,10 +17,14 @@ class _BooksOverdueState extends State<BooksOverdue> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Books OverDue"),
-        backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
+        title: const Text(
+          "Books OverDue",
+          style: TextStyle(fontWeight: FontWeight.w600),
+        ),
+        centerTitle: true,
+        backgroundColor: bgColour,
       ),
-      backgroundColor: const Color.fromRGBO(244, 223, 195, 1.0),
+      backgroundColor: bgColour,
       body: Container(
         child: FirebaseAnimatedList(
           defaultChild: const Center(
@@ -58,6 +63,8 @@ class _BooksOverdueState extends State<BooksOverdue> {
               //     Map.fromIterable(snapshot.child("BooksAssigned").children);
               // log(childrens["BookURL"]);
               return Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 child: Column(
                   children: [
                     Row(

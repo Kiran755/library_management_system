@@ -1,6 +1,7 @@
 import 'package:firstapp/constants/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:firstapp/constants/colors.dart';
 
 class FirstScreen extends StatelessWidget {
   const FirstScreen({Key? key}) : super(key: key);
@@ -8,7 +9,7 @@ class FirstScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(244, 223, 195, 1.0),
+      backgroundColor: bgColour,
       body: Padding(
         padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.3),
         child: Center(
@@ -40,7 +41,8 @@ class FirstScreen extends StatelessWidget {
                       .pushNamedAndRemoveUntil(loginRoute, (route) => false);
                 },
                 style: TextButton.styleFrom(
-                  foregroundColor: Colors.white, backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
+                  foregroundColor: Colors.white,
+                  backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
                   padding: const EdgeInsets.all(10),
                   minimumSize: const Size(250, 50),
                   shape: RoundedRectangleBorder(

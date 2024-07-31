@@ -24,30 +24,38 @@ class _BookIssueViewState extends State<BookIssueView> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
-        color: widget.color,
+        color: Colors.white,
       ),
+      padding: const EdgeInsets.all(12.0),
       child: Row(
         children: [
-          SizedBox(
-              height: 180,
-              width: 100,
-              child: Image.network(
-                widget.value,
-                loadingBuilder: (BuildContext context, Widget child,
-                    ImageChunkEvent? loadingProgress) {
-                  if (loadingProgress == null) {
-                    return child;
-                  }
-                  return Center(
-                    child: CircularProgressIndicator(
-                      value: loadingProgress.expectedTotalBytes != null
-                          ? loadingProgress.cumulativeBytesLoaded /
-                              loadingProgress.expectedTotalBytes!
-                          : null,
-                    ),
-                  );
-                },
-              )),
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: SizedBox(
+                height: 180,
+                width: 120,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.network(
+                    widget.value,
+                    fit: BoxFit.cover,
+                    loadingBuilder: (BuildContext context, Widget child,
+                        ImageChunkEvent? loadingProgress) {
+                      if (loadingProgress == null) {
+                        return child;
+                      }
+                      return Center(
+                        child: CircularProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                                  loadingProgress.expectedTotalBytes!
+                              : null,
+                        ),
+                      );
+                    },
+                  ),
+                )),
+          ),
           Flexible(
             child: Container(
               decoration: BoxDecoration(
@@ -59,25 +67,19 @@ class _BookIssueViewState extends State<BookIssueView> {
                 children: [
                   Text(
                     widget.bookName,
+                    textAlign: TextAlign.left,
                     style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.w800),
-                  ),
-                  const SizedBox(
-                    height: 10,
+                        fontSize: 14, fontWeight: FontWeight.w800),
                   ),
                   Text(
                     widget.bookAuthor,
                     textAlign: TextAlign.left,
+                    style: const TextStyle(fontSize: 14),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  const SizedBox(height: 16),
                   Text(
                     widget.bookCode,
                     textAlign: TextAlign.left,
-                  ),
-                  const SizedBox(
-                    height: 60,
                   ),
                 ],
               ),

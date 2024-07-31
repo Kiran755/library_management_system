@@ -27,7 +27,7 @@ class _BookViewerState extends State<BookViewer> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
-        color: widget.color,
+        color: Colors.white,
       ),
       padding: const EdgeInsets.all(12.0),
       child: Row(
@@ -62,6 +62,7 @@ class _BookViewerState extends State<BookViewer> {
                 children: [
                   Text(
                     widget.bookName,
+                    textAlign: TextAlign.left,
                     style: const TextStyle(
                         fontSize: 14, fontWeight: FontWeight.w800),
                   ),

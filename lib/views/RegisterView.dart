@@ -5,6 +5,7 @@ import 'package:firstapp/services/auth/auth_service.dart';
 import 'package:firstapp/utilities/ErrorDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:firstapp/constants/colors.dart';
 
 class RegisterView extends StatefulWidget {
   const RegisterView({Key? key}) : super(key: key);
@@ -39,7 +40,7 @@ class _RegisterViewState extends State<RegisterView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(244, 223, 195, 1.0),
+      backgroundColor: bgColour,
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: FutureBuilder(
@@ -178,7 +179,8 @@ class _RegisterViewState extends State<RegisterView> {
                                   }
                                 },
                                 style: TextButton.styleFrom(
-                                  foregroundColor: Colors.white, backgroundColor:
+                                  foregroundColor: Colors.white,
+                                  backgroundColor:
                                       const Color.fromRGBO(158, 90, 100, 1.0),
                                   minimumSize: const Size(250, 40),
                                   shape: RoundedRectangleBorder(
