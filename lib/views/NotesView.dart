@@ -98,17 +98,17 @@ class _NotesViewState extends State<NotesView> {
                   case MenuAction.profile:
                     Navigator.pushNamed(context, profile);
                     break;
-                  // case MenuAction.feedback:
-                    // Navigator.pushNamed(context, feedBack,arguments: );
-                    // break;
+                  case MenuAction.feedback:
+                    Navigator.pushNamed(context, feedBack );
+                    break;
                 }
               },
               itemBuilder: (context) {
                 return const [
                   PopupMenuItem<MenuAction>(
                       value: MenuAction.profile, child: Text("Profile")),
-                  // PopupMenuItem<MenuAction>(
-                      // value: MenuAction.feedback, child: Text("Feedback")),
+                  PopupMenuItem<MenuAction>(
+                      value: MenuAction.feedback, child: Text("Feedback")),
                   PopupMenuItem<MenuAction>(
                       value: MenuAction.logout, child: Text("Logout"))
                 ];
