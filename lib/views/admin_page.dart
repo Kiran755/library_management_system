@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
+import 'admin_feedback_page.dart';
+
 class AdminPage extends StatefulWidget {
   const AdminPage({Key? key}) : super(key: key);
 
@@ -31,6 +33,26 @@ class _AdminPageState extends State<AdminPage> {
       child: Center(
         child: Column(
           children: [
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AdminFeedbackPage()),
+                );
+              },
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
+                minimumSize: const Size(250, 40),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
+              ),
+              child: const Text("Feedbacks"),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
             TextButton(
               onPressed: () {
                 issueBookViaQR();
