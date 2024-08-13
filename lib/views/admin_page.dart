@@ -29,7 +29,7 @@ class _AdminPageState extends State<AdminPage> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 300),
+      padding: const EdgeInsets.only(top: 240),
       child: Center(
         child: Column(
           children: [

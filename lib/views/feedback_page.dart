@@ -47,8 +47,14 @@ class _FeedBackState extends State<FeedBack> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text("Give feedback to admin:"),
-            const SizedBox(height: 10),
+            const Text(
+              "Give feedback to admin:",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            const SizedBox(height: 24),
             TextField(
               controller: _feedbackController,
               maxLines: 5,
@@ -58,9 +64,22 @@ class _FeedBackState extends State<FeedBack> {
               ),
             ),
             const SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: _submitFeedback,
-              child: const Text('Submit'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                  onPressed: _submitFeedback,
+                  style: TextButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
+                    minimumSize: const Size(100, 25),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  child: const Text("Submit"),
+                ),
+              ],
             ),
           ],
         ),
@@ -68,4 +87,3 @@ class _FeedBackState extends State<FeedBack> {
     );
   }
 }
-
