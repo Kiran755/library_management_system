@@ -11,7 +11,9 @@ class AdminFeedbackPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: bgColour,
       appBar: AppBar(
-        title: const Text("Admin Feedback"),
+        title:
+            const Text("Admin Feedback", style: TextStyle(color: Colors.white)),
+        backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance
