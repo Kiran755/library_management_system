@@ -20,46 +20,66 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'firebase_options.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  // NotificationService().initNotification();
+  WidgetsFlutterBinding.ensureInitialized(); // Ensures Flutter environment is ready
 
+  // Initialize Firebase
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } catch (e) {
+    print('Error initializing Firebase: $e');
+    return;
+  }
+
+  // Initialize notifications
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
-  const AndroidInitializationSettings initializationSettingsAndroid =
-      AndroidInitializationSettings(
-          '@mipmap/ic_launcher'); // Replace 'app_icon' with your app's launcher icon.
+  FlutterLocalNotificationsPlugin();
 
+  // Android initialization settings
+  const AndroidInitializationSettings initializationSettingsAndroid =
+  AndroidInitializationSettings('@mipmap/ic_launcher');
+
+  // iOS initialization settings
+  const DarwinInitializationSettings initializationSettingsIOS =
+  DarwinInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true);
+
+  // Combine settings for Android and iOS
   const InitializationSettings initializationSettings = InitializationSettings(
-      android: initializationSettingsAndroid,
-      iOS: null,
-      macOS: null,
-      linux: null);
+    android: initializationSettingsAndroid,
+    iOS: initializationSettingsIOS,
+  );
+
+  // Initialize notifications plugin
   await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+
   tz.initializeTimeZones();
-  await Firebase.initializeApp();
+
+  // Run the app
   runApp(MaterialApp(
     title: 'Flutter Demo',
     debugShowCheckedModeBanner: false,
     theme:
-        ThemeData(primarySwatch: Colors.blue, fontFamily: 'Montserrat-Black'),
+    ThemeData(primarySwatch: Colors.blue, fontFamily: 'Montserrat-Black'),
     home: const FirstScreen(),
     routes: {
       loginRoute: (context) => const LoginView(),
       registerRoute: (context) => const RegisterView(),
-      notesRoute: (context) => const NotesView(
-            Name: "",
-            SapID: "",
-          ),
+      notesRoute: (context) => const NotesView(Name: "", SapID: ""),
       emailVerify: (context) => const EmailVerify(),
       adminPage: (context) => const AdminPage(),
       profile: (context) => const Profile(),
       feedBack: (context) => const FeedBack(),
-      booksCirculation: ((context) => const BooksInCirculation()),
-      BooksOverDue: ((context) => const BooksOverdue()),
-      newAdminPage: ((context) => const NewAdminPage()),
+      booksCirculation: (context) => const BooksInCirculation(),
+      BooksOverDue: (context) => const BooksOverdue(),
+      newAdminPage: (context) => const NewAdminPage(),
     },
   ));
 }
+
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
