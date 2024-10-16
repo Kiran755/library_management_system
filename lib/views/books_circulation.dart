@@ -30,56 +30,69 @@ class _BooksInCirculationState extends State<BooksInCirculation> {
           defaultChild: const Center(
             child: CircularProgressIndicator(),
           ),
-          query: FirebaseDatabase.instance.ref("Database/SAPID"),
+          query: FirebaseDatabase.instance.ref("Database/SAPID"), // Reference to SAPID in the database
           itemBuilder: ((context, snapshot, animation, index) {
-            // log(snapshot.child("BooksAssigned").toString());
-            // var val = 1;
-            if (snapshot.hasChild("BooksAssigned")) {
-              log(snapshot.key.toString());
-              // Map<dynamic,dynamic> books;
-              List<DataSnapshot> childrens =
-                  snapshot.child("BooksAssigned").children.toList();
-              // childrens.forEach((element) => {
-              //   print(element.child());
-              // });
-              // val++;
+            log('Snapshot data: ${snapshot.value.toString()}'); // Debugging snapshot data
 
-              // List<Map<dynamic, dynamic>> childrens =
-              //     Map.fromIterable(snapshot.child("BooksAssigned").children);
-              // log(childrens["BookURL"]);
+            if (snapshot.hasChild("BooksAssigned")) { // Ensure that the student has assigned books
+              String sapid = snapshot.key.toString();
+              String studentName = snapshot.child("Name").value?.toString() ?? '-'; // Get the student's name
+              String studentEmail = snapshot.child("Email").value?.toString() ?? '-'; // Get the student's email
+              List<DataSnapshot> booksAssigned = snapshot.child("BooksAssigned").children.toList(); // List of books assigned
+
+              log('SAPID: $sapid');
+              log('Name: $studentName');
+              log('Email: $studentEmail');
+
               return Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text("SAPID : ${snapshot.key}",
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold, // Make text bold
-                              fontSize: 20.0, // Set the font size
-                            )),
+                        Text(
+                          "SAPID : $sapid",
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0,
+                          ),
+                        ),
                       ],
                     ),
+                    SizedBox(height: 8), // Spacing between elements
+                    Text(
+                      "Name: $studentName",
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0,
+                      ),
+                    ),
+                    Text(
+                      "Email: $studentEmail",
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.0,
+                      ),
+                    ),
+                    SizedBox(height: 10), // Spacing for book list
                     Column(
-                      children: childrens
-                          .map((Book) => BookViewer(
-                              value: Book.child("BookURL").value.toString(),
-                              bookName: Book.child("BookName").value.toString(),
-                              bookAuthor:
-                                  Book.child("BookAuthor").value.toString(),
-                              bookCode: Book.child("BookCode").value.toString(),
-                              DueDate: Book.child("Due Date").value.toString(),
-                              IssueDate:
-                                  Book.child("Issued Date").value.toString()))
+                      children: booksAssigned
+                          .map((book) => BookViewer(
+                          value: book.child("BookURL").value.toString(),
+                          bookName: book.child("BookName").value.toString(),
+                          bookAuthor: book.child("BookAuthor").value.toString(),
+                          bookCode: book.child("BookCode").value.toString(),
+                          DueDate: book.child("Due Date").value.toString(),
+                          IssueDate: book.child("Issued Date").value.toString()))
                           .toList(),
-                    )
+                    ),
                   ],
                 ),
               );
             }
-            return Container();
+            return Container(); // Return empty container if no BooksAssigned
           }),
         ),
       ),
