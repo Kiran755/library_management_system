@@ -50,7 +50,12 @@ class _IssueBookState extends State<IssueBook> {
     return Scaffold(
         backgroundColor: bgColour,
         appBar: AppBar(
-          title: const Text("Issue Book"),
+          title: const Text(
+            "Issue Book",
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
           backgroundColor: const Color.fromRGBO(158, 90, 100, 1.0),
         ),
         body: Padding(
