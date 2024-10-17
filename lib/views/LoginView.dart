@@ -103,7 +103,7 @@ class _LoginViewState extends State<LoginView> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  const ForgotPasswordScreen()));
+                                              const ForgotPasswordScreen()));
                                     },
                                     child: const Text("Forgot Password?"),
                                   )),
@@ -134,14 +134,14 @@ class _LoginViewState extends State<LoginView> {
                                               "password")) {
                                     Navigator.of(context)
                                         .pushNamedAndRemoveUntil(
-                                            newAdminPage, (route) => false);
+                                        newAdminPage, (route) => false);
                                   } else if (user?.isEmailVerified ?? false) {
                                     final userUid = user?.uid;
                                     DatabaseReference dbRef = FirebaseDatabase
                                         .instance
                                         .ref("Database/Names");
                                     final snapShot =
-                                        await dbRef.child("$userUid").get();
+                                    await dbRef.child("$userUid").get();
                                     if (snapShot.exists) {
                                       final sapID = snapShot
                                           .child("SapId")
@@ -153,10 +153,10 @@ class _LoginViewState extends State<LoginView> {
                                           .toString();
                                       Navigator.of(context)
                                           .push(MaterialPageRoute(
-                                              builder: (context) => NotesView(
-                                                    Name: Name,
-                                                    SapID: sapID,
-                                                  )));
+                                          builder: (context) => NotesView(
+                                            Name: Name,
+                                            SapID: sapID,
+                                          )));
                                     }
                                     // Navigator.of(context)
                                     //     .pushNamedAndRemoveUntil(
@@ -167,7 +167,7 @@ class _LoginViewState extends State<LoginView> {
                                     Navigator.of(context)
                                         .pushNamedAndRemoveUntil(
                                       loginRoute,
-                                      (route) => false,
+                                          (route) => false,
                                     );
                                   }
                                 } on UserNotFoundException {
@@ -184,7 +184,7 @@ class _LoginViewState extends State<LoginView> {
                               style: TextButton.styleFrom(
                                 foregroundColor: Colors.white,
                                 backgroundColor:
-                                    const Color.fromRGBO(158, 90, 100, 1.0),
+                                const Color.fromRGBO(158, 90, 100, 1.0),
                                 minimumSize: const Size(250, 40),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25),

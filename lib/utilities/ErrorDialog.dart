@@ -10,9 +10,7 @@ Future<void> showError(BuildContext context, String text) {
           actions: [
             TextButton(
                 onPressed: () {
-                  // pop out of the dialog box
-                  Navigator.of(context).pop();
-                  // pop out of the current screen to go back to home screen
+                  // pop out of the dialog box only
                   Navigator.of(context).pop();
                 },
                 child: const Text("OK"))
