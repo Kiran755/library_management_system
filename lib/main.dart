@@ -16,11 +16,16 @@ import 'package:firstapp/views/new_admin_menu.dart';
 import 'package:firstapp/views/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'firebase_options.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); // Ensures Flutter environment is ready
+  WidgetsFlutterBinding
+      .ensureInitialized(); // Ensures Flutter environment is ready
+
+  // Request Camera Permission
+  await requestCameraPermission();
 
   // Initialize Firebase
   try {
@@ -34,18 +39,18 @@ void main() async {
 
   // Initialize notifications
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-  FlutterLocalNotificationsPlugin();
+      FlutterLocalNotificationsPlugin();
 
   // Android initialization settings
   const AndroidInitializationSettings initializationSettingsAndroid =
-  AndroidInitializationSettings('@mipmap/ic_launcher');
+      AndroidInitializationSettings('@mipmap/ic_launcher');
 
   // iOS initialization settings
   const DarwinInitializationSettings initializationSettingsIOS =
-  DarwinInitializationSettings(
-      requestAlertPermission: true,
-      requestBadgePermission: true,
-      requestSoundPermission: true);
+      DarwinInitializationSettings(
+          requestAlertPermission: true,
+          requestBadgePermission: true,
+          requestSoundPermission: true);
 
   // Combine settings for Android and iOS
   const InitializationSettings initializationSettings = InitializationSettings(
@@ -63,7 +68,7 @@ void main() async {
     title: 'Flutter Demo',
     debugShowCheckedModeBanner: false,
     theme:
-    ThemeData(primarySwatch: Colors.blue, fontFamily: 'Montserrat-Black'),
+        ThemeData(primarySwatch: Colors.blue, fontFamily: 'Montserrat-Black'),
     home: const FirstScreen(),
     routes: {
       loginRoute: (context) => const LoginView(),
@@ -80,6 +85,17 @@ void main() async {
   ));
 }
 
+// Function to request camera permission
+Future<void> requestCameraPermission() async {
+  var status = await Permission.camera.status;
+  if (status.isDenied) {
+    status = await Permission.camera.request();
+  }
+
+  if (status.isPermanentlyDenied) {
+    openAppSettings(); // Directs user to settings if permission is permanently denied
+  }
+}
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -132,5 +148,3 @@ Future<bool> ShowPopUp(BuildContext context) {
     },
   ).then((value) => value ?? false);
 }
-// This widget is the root of your application
-
