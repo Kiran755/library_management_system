@@ -104,7 +104,8 @@ class _ReturnBookState extends State<ReturnBook> {
                         if (Listsnapshot.exists) {
                           if (Listsnapshot.children.isEmpty) {
                             print("No Books to return!");
-                            showError(context, "There are no assigned books!");
+                            showError(
+                                context, "There are no assigned books!", true);
                             return;
                           }
                         }
@@ -112,7 +113,8 @@ class _ReturnBookState extends State<ReturnBook> {
                             await ref.child('BooksAssigned/$bookCode').get();
                         if (!snapshot.exists) {
                           print("Book Not found!");
-                          showError(context, "Book Not assigned to the user");
+                          showError(
+                              context, "Book Not assigned to the user", true);
                         } else {
                           DatabaseReference localref = FirebaseDatabase.instance
                               .ref(
@@ -136,7 +138,8 @@ class _ReturnBookState extends State<ReturnBook> {
                               .collection(widget.colName)
                               .doc(widget.docName)
                               .update({"Availability": "Avaiable"});
-                          showError(context, "Book Returned Successfully");
+                          showError(
+                              context, "Book Returned Successfully", true);
                         }
                       },
                       style: TextButton.styleFrom(

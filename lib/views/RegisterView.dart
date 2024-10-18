@@ -171,11 +171,14 @@ class _RegisterViewState extends State<RegisterView> {
                                     Navigator.of(context)
                                         .pushNamed(emailVerify);
                                   } on InvalidEmailException {
-                                    await showError(context, "invalid Email");
+                                    await showError(
+                                        context, "invalid Email", false);
                                   } on WeakPasswordAuthException {
-                                    await showError(context, "Weak Password");
+                                    await showError(
+                                        context, "Weak Password", false);
                                   } catch (e) {
-                                    await showError(context, e.toString());
+                                    await showError(
+                                        context, e.toString(), false);
                                   }
                                 },
                                 style: TextButton.styleFrom(

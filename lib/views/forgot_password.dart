@@ -52,11 +52,15 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                   try {
                     await auth.sendPasswordResetEmail(
                         email: email_controller.text.toString());
-                    showError(context,
-                        "We have sent the email to reset your password. Please check the inbox or spam folder of your email");
+                    showError(
+                        context,
+                        "We have sent the email to reset your password. Please check the inbox or spam folder of your email",
+                        false);
                   } on FirebaseAuthException {
-                    showError(context,
-                        "Error Occured Please Try again after some time!");
+                    showError(
+                        context,
+                        "Error Occured Please Try again after some time!",
+                        false);
 // show the snackbar here
                   }
                 },

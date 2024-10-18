@@ -148,8 +148,10 @@ class _SearchBookViewerState extends State<SearchBookViewer> {
                                     if (listsnapshot.children.length == 3) {
                                       print(
                                           "Maximum Book Issuing limit reached!");
-                                      showError(context,
-                                          "Maximum Book Issuing limit reached!");
+                                      showError(
+                                          context,
+                                          "Maximum Book Issuing limit reached!",
+                                          false);
                                       return;
                                     }
                                   }
@@ -159,7 +161,8 @@ class _SearchBookViewerState extends State<SearchBookViewer> {
                                       .get();
                                   if (snapshot.exists) {
                                     print("Book Already Exits!");
-                                    showError(context, "Book Already Exists!");
+                                    showError(
+                                        context, "Book Already Exists!", false);
                                     return;
                                   } else {
                                     await ref.update({
@@ -200,8 +203,10 @@ class _SearchBookViewerState extends State<SearchBookViewer> {
                                     //   },
                                     //   "requested": requestedBy
                                     // });
-                                    showError(context,
-                                        "Book Request Done successfully");
+                                    showError(
+                                        context,
+                                        "Book Request Done successfully",
+                                        false);
                                   }
                                 },
                                 style: TextButton.styleFrom(

@@ -141,15 +141,17 @@ class _IssueBookState extends State<IssueBook> {
                         if (Availability == "Not Available") {
                           print(
                               "Book is requested by someone else. Please wait for your turn");
-                          showError(context,
-                              "Book is requested by someone else. Please wait for your turn");
+                          showError(
+                              context,
+                              "Book is requested by someone else. Please wait for your turn",
+                              true);
                           return;
                         }
                         if (Listsnapshot.exists) {
                           if (Listsnapshot.children.length == 3) {
                             print("Maximum Book Issuing limit reached!");
-                            showError(
-                                context, "Maximum Book Issuing limit reached!");
+                            showError(context,
+                                "Maximum Book Issuing limit reached!", true);
                             return;
                           }
                         }
@@ -157,7 +159,7 @@ class _IssueBookState extends State<IssueBook> {
                             await ref.child('BooksAssigned/$bookCode').get();
                         if (snapshot.exists) {
                           print("Book Already Exits!");
-                          showError(context, "Book Already Exists");
+                          showError(context, "Book Already Exists", true);
                         } else {
                           await ref.update({
                             "BooksAssigned/$bookCode": {
@@ -217,7 +219,8 @@ class _IssueBookState extends State<IssueBook> {
                               .collection(widget.colName)
                               .doc(widget.docName)
                               .update({"Availability": "Not Available"});
-                          showError(context, "Book Assigned Successfully");
+                          showError(
+                              context, "Book Assigned Successfully", true);
                         }
                       },
                       style: TextButton.styleFrom(
