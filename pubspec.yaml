@@ -46,11 +46,17 @@ dependencies:
   cached_network_image: ^3.2.1
   intl: ^0.19.0
   permission_handler: ^10.2.0
+  flutter_launcher_icons: ^0.14.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+flutter_icons:
+  image_path: "assets/appicon.png"
+  adaptive_icon_foreground: "assets/appicon.png"
+  adaptive_icon_background: "#ffffff"
+  android: true
+  ios: true
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
