@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'package:firstapp/views/book_viewer.dart';
-import 'package:firstapp/views/recomend_book_viewer.dart';
+import '../views/book_viewer.dart';
+import '../views/recomend_book_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 

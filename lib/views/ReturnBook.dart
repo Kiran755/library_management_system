@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firstapp/utilities/ErrorDialog.dart';
-import 'package:firstapp/utilities/showMessage.dart';
+import '../utilities/ErrorDialog.dart';
+import '../utilities/showMessage.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:firstapp/constants/colors.dart';
+import '../constants/colors.dart';
 
 import 'BookIssueView.dart';
 

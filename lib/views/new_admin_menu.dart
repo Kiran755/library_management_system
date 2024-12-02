@@ -1,12 +1,12 @@
-import 'package:firstapp/views/BooksOverDue.dart';
-import 'package:firstapp/views/IssueBook.dart';
-import 'package:firstapp/views/ReturnBook.dart';
-import 'package:firstapp/views/admin_page.dart';
-import 'package:firstapp/views/books_circulation.dart';
+import '../views/BooksOverDue.dart';
+import '../views/IssueBook.dart';
+import '../views/ReturnBook.dart';
+import '../views/admin_page.dart';
+import '../views/books_circulation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:firstapp/constants/colors.dart';
+import '../constants/colors.dart';
 
 import '../constants/routes.dart';
 import '../enum/menuActions.dart';

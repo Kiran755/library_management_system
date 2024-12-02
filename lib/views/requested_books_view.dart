@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'package:firstapp/views/requestBookViewer.dart';
+import '../views/requestBookViewer.dart';
 import 'package:flutter/material.dart';
 
 class RequestedBookView extends StatefulWidget {
@@ -86,20 +86,15 @@ class _RequestedBookViewState extends State<RequestedBookView> {
                         RequestBookViewer(
                           color: Colors.white,
                           value: snapshot.child("BookURL").value.toString(),
-                          issuedDate: snapshot
-                              .child("RequestedDate")
-                              .value
-                              .toString(),
+                          issuedDate:
+                              snapshot.child("RequestedDate").value.toString(),
                           requestedBy: snapshot.children.length.toString(),
                           bookAuthor:
                               snapshot.child("BookAuthor").value.toString(),
-                          bookName:
-                              snapshot.child("BookName").value.toString(),
-                          bookCode:
-                              snapshot.child("BookCode").value.toString(),
+                          bookName: snapshot.child("BookName").value.toString(),
+                          bookCode: snapshot.child("BookCode").value.toString(),
                           sapId: widget.SapId,
-                          DomainName:
-                              snapshot.child("Domain").value.toString(),
+                          DomainName: snapshot.child("Domain").value.toString(),
                           queueData: queueData,
                         ),
                         const Divider(

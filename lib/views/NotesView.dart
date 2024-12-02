@@ -1,13 +1,13 @@
-import 'package:firstapp/services/auth/auth_service.dart';
-import 'package:firstapp/views/SearchTab.dart';
-import 'package:firstapp/views/history_view.dart';
-import 'package:firstapp/views/requested_books_view.dart';
+import '../services/auth/auth_service.dart';
+import '../views/SearchTab.dart';
+import '../views/history_view.dart';
+import '../views/requested_books_view.dart';
 import 'package:flutter/material.dart';
-import 'package:firstapp/views/search_viewer.dart';
+import '../views/search_viewer.dart';
 import '../constants/routes.dart';
 import '../enum/menuActions.dart';
 import '../main.dart';
-import 'package:firstapp/constants/colors.dart';
+import '../constants/colors.dart';
 
 class NotesView extends StatefulWidget {
   final String Name, SapID;
@@ -99,7 +99,7 @@ class _NotesViewState extends State<NotesView> {
                     Navigator.pushNamed(context, profile);
                     break;
                   case MenuAction.feedback:
-                    Navigator.pushNamed(context, feedBack );
+                    Navigator.pushNamed(context, feedBack);
                     break;
                 }
               },

@@ -1,7 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'package:firstapp/constants/colors.dart';
-import 'package:firstapp/views/book_viewer.dart';
+import '../constants/colors.dart';
+import '../views/book_viewer.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer';
 
@@ -30,22 +30,30 @@ class _BooksInCirculationState extends State<BooksInCirculation> {
           defaultChild: const Center(
             child: CircularProgressIndicator(),
           ),
-          query: FirebaseDatabase.instance.ref("Database/SAPID"), // Reference to SAPID in the database
+          query: FirebaseDatabase.instance
+              .ref("Database/SAPID"), // Reference to SAPID in the database
           itemBuilder: ((context, snapshot, animation, index) {
             log('Snapshot data: ${snapshot.value.toString()}'); // Debugging snapshot data
 
-            if (snapshot.hasChild("BooksAssigned")) { // Ensure that the student has assigned books
+            if (snapshot.hasChild("BooksAssigned")) {
+              // Ensure that the student has assigned books
               String sapid = snapshot.key.toString();
-              String studentName = snapshot.child("Name").value?.toString() ?? '-'; // Get the student's name
-              String studentEmail = snapshot.child("Email").value?.toString() ?? '-'; // Get the student's email
-              List<DataSnapshot> booksAssigned = snapshot.child("BooksAssigned").children.toList(); // List of books assigned
+              String studentName = snapshot.child("Name").value?.toString() ??
+                  '-'; // Get the student's name
+              String studentEmail = snapshot.child("Email").value?.toString() ??
+                  '-'; // Get the student's email
+              List<DataSnapshot> booksAssigned = snapshot
+                  .child("BooksAssigned")
+                  .children
+                  .toList(); // List of books assigned
 
               log('SAPID: $sapid');
               log('Name: $studentName');
               log('Email: $studentEmail');
 
               return Container(
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -80,12 +88,14 @@ class _BooksInCirculationState extends State<BooksInCirculation> {
                     Column(
                       children: booksAssigned
                           .map((book) => BookViewer(
-                          value: book.child("BookURL").value.toString(),
-                          bookName: book.child("BookName").value.toString(),
-                          bookAuthor: book.child("BookAuthor").value.toString(),
-                          bookCode: book.child("BookCode").value.toString(),
-                          DueDate: book.child("Due Date").value.toString(),
-                          IssueDate: book.child("Issued Date").value.toString()))
+                              value: book.child("BookURL").value.toString(),
+                              bookName: book.child("BookName").value.toString(),
+                              bookAuthor:
+                                  book.child("BookAuthor").value.toString(),
+                              bookCode: book.child("BookCode").value.toString(),
+                              DueDate: book.child("Due Date").value.toString(),
+                              IssueDate:
+                                  book.child("Issued Date").value.toString()))
                           .toList(),
                     ),
                   ],

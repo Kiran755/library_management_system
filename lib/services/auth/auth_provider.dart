@@ -1,4 +1,4 @@
-import "package:firstapp/services/auth/auth_user.dart";
+import "auth_user.dart";
 
 abstract class AuthProvider {
   AuthUser? get currentUser;

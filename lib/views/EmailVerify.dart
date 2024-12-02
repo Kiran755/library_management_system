@@ -1,6 +1,6 @@
-import 'package:firstapp/services/auth/auth_service.dart';
+import '../services/auth/auth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:firstapp/constants/colors.dart';
+import '../constants/colors.dart';
 
 import '../constants/routes.dart';
 

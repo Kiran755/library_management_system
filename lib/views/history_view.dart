@@ -1,6 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'package:firstapp/views/book_viewer.dart';
+import '../views/book_viewer.dart';
 import 'package:flutter/material.dart';
 
 class HistoryView extends StatefulWidget {

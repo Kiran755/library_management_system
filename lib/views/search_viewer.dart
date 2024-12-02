@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firstapp/views/SearchBookViewer.dart';
+import '../views/SearchBookViewer.dart';
 import 'package:flutter/material.dart';
-import 'package:firstapp/constants/colors.dart';
+import '../constants/colors.dart';
 
 class SearchView extends StatefulWidget {
   final String sapId, Name;

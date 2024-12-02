@@ -1,15 +1,15 @@
 import 'package:bcrypt/bcrypt.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firstapp/constants/credentials.dart';
-import 'package:firstapp/constants/routes.dart';
-import 'package:firstapp/services/auth/auth_exceptions.dart';
-import 'package:firstapp/services/auth/auth_service.dart';
-import 'package:firstapp/utilities/ErrorDialog.dart';
-import 'package:firstapp/views/NotesView.dart';
-import 'package:firstapp/views/forgot_password.dart';
+import '../constants/credentials.dart';
+import '../constants/routes.dart';
+import '../services/auth/auth_exceptions.dart';
+import '../services/auth/auth_service.dart';
+import '../utilities/ErrorDialog.dart';
+import '../views/NotesView.dart';
+import '../views/forgot_password.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:firstapp/constants/colors.dart';
+import '../constants/colors.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);

@@ -1,7 +1,7 @@
-import 'package:firstapp/constants/routes.dart';
+import '../constants/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:firstapp/constants/colors.dart';
+import '../constants/colors.dart';
 
 class FirstScreen extends StatelessWidget {
   const FirstScreen({Key? key}) : super(key: key);

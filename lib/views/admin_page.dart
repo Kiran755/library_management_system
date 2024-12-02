@@ -1,5 +1,5 @@
-import 'package:firstapp/views/IssueBook.dart';
-import 'package:firstapp/views/ReturnBook.dart';
+import '../views/IssueBook.dart';
+import '../views/ReturnBook.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -37,7 +37,8 @@ class _AdminPageState extends State<AdminPage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const AdminFeedbackPage()),
+                  MaterialPageRoute(
+                      builder: (context) => const AdminFeedbackPage()),
                 );
               },
               style: TextButton.styleFrom(
