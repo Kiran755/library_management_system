@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "757571063370",
+    "firebase_url": "https://flutter-project-notes-app-1212-default-rtdb.firebaseio.com",
     "project_id": "flutter-project-notes-app-1212",
     "storage_bucket": "flutter-project-notes-app-1212.appspot.com"
   },
@@ -29,6 +30,85 @@
             {
               "client_id": "757571063370-400hjd0nplp2ud4fc097hgdss5mdt696.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "757571063370-jdj21fji5vn13up13q418gf95gipdjks.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.libraryUploader"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757571063370:android:4234e3b077cdfe386a20b3",
+        "android_client_info": {
+          "package_name": "com.example.library_uploader"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "757571063370-400hjd0nplp2ud4fc097hgdss5mdt696.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4PIYzS8D-RCm69zig-Gx7f6xLxbCYXGk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "757571063370-400hjd0nplp2ud4fc097hgdss5mdt696.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "757571063370-jdj21fji5vn13up13q418gf95gipdjks.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.libraryUploader"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757571063370:android:9affc0846d84a99a6a20b3",
+        "android_client_info": {
+          "package_name": "com.it.library"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "757571063370-400hjd0nplp2ud4fc097hgdss5mdt696.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4PIYzS8D-RCm69zig-Gx7f6xLxbCYXGk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "757571063370-400hjd0nplp2ud4fc097hgdss5mdt696.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "757571063370-jdj21fji5vn13up13q418gf95gipdjks.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.libraryUploader"
+              }
             }
           ]
         }

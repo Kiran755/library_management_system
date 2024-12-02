@@ -76,70 +76,65 @@ class _SearchTabState extends State<SearchTab> {
                     ),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  child: Expanded(
-                    child: SizedBox(
-                      height: 400,
-                      child: FirebaseAnimatedList(
-                        defaultChild:
-                            const Center(child: CircularProgressIndicator()),
-                        query: FirebaseDatabase.instance.ref(
-                            "Database/SAPID/${widget.SapId}/BooksAssigned"),
-                        itemBuilder: (context, snapshot, animation, index) {
-                          print("SPAID : ${widget.SapId}");
-                          // String date =
-                          //     snapshot.child("Due Date").value.toString();
-                          // String tempDay = date.substring(0, date.indexOf("/"));
+                  child: SizedBox(
+                    height: 400,
+                    child: FirebaseAnimatedList(
+                      defaultChild:
+                          const Center(child: CircularProgressIndicator()),
+                      query: FirebaseDatabase.instance
+                          .ref("Database/SAPID/${widget.SapId}/BooksAssigned"),
+                      itemBuilder: (context, snapshot, animation, index) {
+                        print("SPAID : ${widget.SapId}");
+                        // String date =
+                        //     snapshot.child("Due Date").value.toString();
+                        // String tempDay = date.substring(0, date.indexOf("/"));
 
-                          // String dueDay =
-                          //     int.parse(tempDay) < 10 ? "0" + tempDay : tempDay;
+                        // String dueDay =
+                        //     int.parse(tempDay) < 10 ? "0" + tempDay : tempDay;
 
-                          // String sub = date.substring(date.indexOf("/") + 1);
-                          // String tempMonth = sub.substring(0, sub.indexOf("/"));
-                          // String dueMonth = int.parse(tempMonth) < 10
-                          //     ? "0" + tempMonth
-                          //     : tempMonth;
-                          // String dueYear = sub.substring(sub.indexOf("/") + 1);
-                          // print("This is the year : $sub");
-                          // String formatDate =
-                          //     "$dueYear-$dueMonth-$dueDay 12:00:00";
-                          // DateTime new_date = DateTime.parse(formatDate);
-                          // debugPrint(
-                          //     "Notifcation scheduled for that time $new_date");
-                          // NotificationService().scheduleNotification(
-                          //     title: "Reminder",
-                          //     body:
-                          //         "Reminder for returning the book today! If you have already returned the book,please ignore this message",
-                          //     scheduledNotificationDateTime: new_date);
-                          return Column(
-                            children: [
-                              BookViewer(
-                                value:
-                                    snapshot.child("BookURL").value.toString(),
-                                DueDate:
-                                    snapshot.child("Due Date").value.toString(),
-                                IssueDate: snapshot
-                                    .child("Issued Date")
-                                    .value
-                                    .toString(),
-                                bookAuthor: snapshot
-                                    .child("BookAuthor")
-                                    .value
-                                    .toString(),
-                                bookName:
-                                    snapshot.child("BookName").value.toString(),
-                                bookCode:
-                                    snapshot.child("BookCode").value.toString(),
-                              ),
-                              const Divider(
-                                indent: 10,
-                                endIndent: 10,
-                                thickness: 2,
-                                color: Color.fromRGBO(158, 90, 100, 1.0),
-                              ),
-                            ],
-                          );
-                        },
-                      ),
+                        // String sub = date.substring(date.indexOf("/") + 1);
+                        // String tempMonth = sub.substring(0, sub.indexOf("/"));
+                        // String dueMonth = int.parse(tempMonth) < 10
+                        //     ? "0" + tempMonth
+                        //     : tempMonth;
+                        // String dueYear = sub.substring(sub.indexOf("/") + 1);
+                        // print("This is the year : $sub");
+                        // String formatDate =
+                        //     "$dueYear-$dueMonth-$dueDay 12:00:00";
+                        // DateTime new_date = DateTime.parse(formatDate);
+                        // debugPrint(
+                        //     "Notifcation scheduled for that time $new_date");
+                        // NotificationService().scheduleNotification(
+                        //     title: "Reminder",
+                        //     body:
+                        //         "Reminder for returning the book today! If you have already returned the book,please ignore this message",
+                        //     scheduledNotificationDateTime: new_date);
+                        return Column(
+                          children: [
+                            BookViewer(
+                              value: snapshot.child("BookURL").value.toString(),
+                              DueDate:
+                                  snapshot.child("Due Date").value.toString(),
+                              IssueDate: snapshot
+                                  .child("Issued Date")
+                                  .value
+                                  .toString(),
+                              bookAuthor:
+                                  snapshot.child("BookAuthor").value.toString(),
+                              bookName:
+                                  snapshot.child("BookName").value.toString(),
+                              bookCode:
+                                  snapshot.child("BookCode").value.toString(),
+                            ),
+                            const Divider(
+                              indent: 10,
+                              endIndent: 10,
+                              thickness: 2,
+                              color: Color.fromRGBO(158, 90, 100, 1.0),
+                            ),
+                          ],
+                        );
+                      },
                     ),
                   ),
                 ),
@@ -201,8 +196,7 @@ class _SearchTabState extends State<SearchTab> {
                               books = snapshot.data as List<dynamic>;
 
                               print("this is form builder : ${snapshot.data}");
-                              return Expanded(
-                                  child: SizedBox(
+                              return SizedBox(
                                 height: 650,
                                 child: Column(
                                   children: [
@@ -248,7 +242,7 @@ class _SearchTabState extends State<SearchTab> {
                                             : "")
                                   ],
                                 ),
-                              ));
+                              );
                             } else {
                               return const Text("No data found");
                             }

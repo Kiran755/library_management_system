@@ -51,68 +51,66 @@ class _RequestedBookViewState extends State<RequestedBookView> {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: SingleChildScrollView(
-              child: Expanded(
-                child: SizedBox(
-                  height: 540,
-                  child: FirebaseAnimatedList(
-                    defaultChild:
-                        const Center(child: CircularProgressIndicator()),
-                    query: FirebaseDatabase.instance
-                        .ref("Database/SAPID/${widget.SapId}/BooksRequested"),
-                    itemBuilder: (context, snapshot, animation, index) {
-                      FirebaseFirestore.instance
-                          .collection("${snapshot.child("DomainName")}")
-                          .doc("${snapshot.child("BookCode")}")
-                          .get()
-                          .then((DocumentSnapshot documentSnapshot) {
-                        // Check if the document exists.
-                        if (documentSnapshot.exists) {
-                          // Access the data from the document.
-                          Map<String, dynamic> data =
-                              documentSnapshot.data() as Map<String, dynamic>;
-                          List<String> firestoreQueue =
-                              data['queue'] as List<String>;
-                          setState(() {
-                            queueData = List.from(firestoreQueue);
-                          });
-                        } else {
-                          // Document does not exist.
-                          // Handle the case where the document is not found.
-                        }
-                      }).catchError((error) {
-                        // Handle any errors that occur during the operation.
-                      });
-                      return Column(
-                        children: [
-                          RequestBookViewer(
-                            color: Colors.white,
-                            value: snapshot.child("BookURL").value.toString(),
-                            issuedDate: snapshot
-                                .child("RequestedDate")
-                                .value
-                                .toString(),
-                            requestedBy: snapshot.children.length.toString(),
-                            bookAuthor:
-                                snapshot.child("BookAuthor").value.toString(),
-                            bookName:
-                                snapshot.child("BookName").value.toString(),
-                            bookCode:
-                                snapshot.child("BookCode").value.toString(),
-                            sapId: widget.SapId,
-                            DomainName:
-                                snapshot.child("Domain").value.toString(),
-                            queueData: queueData,
-                          ),
-                          const Divider(
-                            indent: 10,
-                            endIndent: 10,
-                            thickness: 5,
-                            color: Colors.transparent,
-                          ),
-                        ],
-                      );
-                    },
-                  ),
+              child: SizedBox(
+                height: 540,
+                child: FirebaseAnimatedList(
+                  defaultChild:
+                      const Center(child: CircularProgressIndicator()),
+                  query: FirebaseDatabase.instance
+                      .ref("Database/SAPID/${widget.SapId}/BooksRequested"),
+                  itemBuilder: (context, snapshot, animation, index) {
+                    FirebaseFirestore.instance
+                        .collection("${snapshot.child("DomainName")}")
+                        .doc("${snapshot.child("BookCode")}")
+                        .get()
+                        .then((DocumentSnapshot documentSnapshot) {
+                      // Check if the document exists.
+                      if (documentSnapshot.exists) {
+                        // Access the data from the document.
+                        Map<String, dynamic> data =
+                            documentSnapshot.data() as Map<String, dynamic>;
+                        List<String> firestoreQueue =
+                            data['queue'] as List<String>;
+                        setState(() {
+                          queueData = List.from(firestoreQueue);
+                        });
+                      } else {
+                        // Document does not exist.
+                        // Handle the case where the document is not found.
+                      }
+                    }).catchError((error) {
+                      // Handle any errors that occur during the operation.
+                    });
+                    return Column(
+                      children: [
+                        RequestBookViewer(
+                          color: Colors.white,
+                          value: snapshot.child("BookURL").value.toString(),
+                          issuedDate: snapshot
+                              .child("RequestedDate")
+                              .value
+                              .toString(),
+                          requestedBy: snapshot.children.length.toString(),
+                          bookAuthor:
+                              snapshot.child("BookAuthor").value.toString(),
+                          bookName:
+                              snapshot.child("BookName").value.toString(),
+                          bookCode:
+                              snapshot.child("BookCode").value.toString(),
+                          sapId: widget.SapId,
+                          DomainName:
+                              snapshot.child("Domain").value.toString(),
+                          queueData: queueData,
+                        ),
+                        const Divider(
+                          indent: 10,
+                          endIndent: 10,
+                          thickness: 5,
+                          color: Colors.transparent,
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ),
             ),

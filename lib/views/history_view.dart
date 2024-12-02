@@ -55,43 +55,37 @@ class _HistoryViewState extends State<HistoryView> {
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: SingleChildScrollView(
-              child: Expanded(
-                child: SizedBox(
-                  height: 550,
-                  child: FirebaseAnimatedList(
-                    defaultChild:
-                        const Center(child: CircularProgressIndicator()),
-                    query: FirebaseDatabase.instance
-                        .ref("Database/SAPID/${widget.SapId}/BooksHistory"),
-                    itemBuilder: (context, snapshot, animation, index) {
-                      return Column(
-                        children: [
-                          BookViewer(
-                            color: Colors.white,
-                            value: snapshot.child("BookURL").value.toString(),
-                            DueDate: snapshot
-                                .child("Returned Date")
-                                .value
-                                .toString(),
-                            IssueDate:
-                                snapshot.child("Issued Date").value.toString(),
-                            bookAuthor:
-                                snapshot.child("BookAuthor").value.toString(),
-                            bookName:
-                                snapshot.child("BookName").value.toString(),
-                            bookCode:
-                                snapshot.child("BookCode").value.toString(),
-                          ),
-                          const Divider(
-                            indent: 10,
-                            endIndent: 10,
-                            thickness: 5,
-                            color: Colors.transparent,
-                          ),
-                        ],
-                      );
-                    },
-                  ),
+              child: SizedBox(
+                height: 550,
+                child: FirebaseAnimatedList(
+                  defaultChild:
+                      const Center(child: CircularProgressIndicator()),
+                  query: FirebaseDatabase.instance
+                      .ref("Database/SAPID/${widget.SapId}/BooksHistory"),
+                  itemBuilder: (context, snapshot, animation, index) {
+                    return Column(
+                      children: [
+                        BookViewer(
+                          color: Colors.white,
+                          value: snapshot.child("BookURL").value.toString(),
+                          DueDate:
+                              snapshot.child("Returned Date").value.toString(),
+                          IssueDate:
+                              snapshot.child("Issued Date").value.toString(),
+                          bookAuthor:
+                              snapshot.child("BookAuthor").value.toString(),
+                          bookName: snapshot.child("BookName").value.toString(),
+                          bookCode: snapshot.child("BookCode").value.toString(),
+                        ),
+                        const Divider(
+                          indent: 10,
+                          endIndent: 10,
+                          thickness: 5,
+                          color: Colors.transparent,
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ),
             ),
