@@ -127,11 +127,22 @@ class _LoginViewState extends State<LoginView> {
                                   // if (!snapShot.exists) {
                                   //   db_ref.set({userUid: sapID});
                                   // }
-                                  if (email == credentials["email"] &&
+                                  // Check if the credentials match any in the list
+                                  final matchedUser = credentials.any((cred) =>
+                                      cred["email"] == email &&
                                       BCrypt.checkpw(
-                                          password,
-                                          credentials["password"] ??
-                                              "password")) {
+                                          password, cred["password"] ?? ""));
+
+                                  // if (email == credentials["email"] &&
+                                  //     BCrypt.checkpw(
+                                  //         password,
+                                  //         credentials["password"] ??
+                                  //             "password")) {
+                                  //   Navigator.of(context)
+                                  //       .pushNamedAndRemoveUntil(
+                                  //           newAdminPage, (route) => false);
+                                  // }
+                                  if (matchedUser) {
                                     Navigator.of(context)
                                         .pushNamedAndRemoveUntil(
                                             newAdminPage, (route) => false);
